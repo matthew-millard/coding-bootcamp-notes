@@ -15,89 +15,111 @@
 - Break a complex problem into smaller parts, and then developing possible solutions that can be clearly presented in a way that computers and/or humans can understand.
 
 The **Four Cornerstones** of computational thinking are:
-    - **Decomposition**
-      : means breaking down a problem into smaller tasks. Breaking a complex problem into smaller problems or subtasks makes solving the larger problem more manageable.
-    - **Pattern Recognition**
+
+   - **Decomposition**
+      : means breaking down a problem into smaller tasks. Breaking a complex problem into smaller problems or subtasks makes solving the larger problem         more manageable.
+      
+   - **Pattern Recognition**
       : Thinking about how we've solved these subtasks previously and finding any patterns that might help us to solve this particular problem.
-    - **Abstraction**
+      
+   - **Abstraction**
       : Is only focusing on relevant information and that we are disregarding details that won't help us solve this problem.
-    - **Testing & Debugging Algorithms**
+      
+   - **Testing & Debugging Algorithms**
       : An algorithm is essentially a sequence of steps or rules that we can use to solve our problem. Think of it as a set of instructions and a recipe.
 
 
 ### Git & Command Line
 
-- pwd
+- `pwd`
   : Print working directory
 
-- Tab key
+- `Tab key`
   : Auto complete (case sensitive)
 
-- mkdir <name of directory>
+- `mkdir <name of directory>`
   : make new directory
 
-- rmdir <name of directory> 
+- `rmdir <name of directory>`
   : remove directory
 
-- rm <file name>
+- `rm <file name>`
   : remove file
+    
+- `ls`
+  : lists all files and directories within the current directory
+    
+- `ls -1`
+  : same as above, however, lists on individual lines
+    
+- `ls -1a`
+  : same as above, however, includes any hidden files
 
-- touch <file name>
-  : add file 
+- `touch <file name>`
+  : add file ls 
 
-- open <file name>
+- `open <file name>`
   : opens file
 
-- code .
+- `code .`
   : will open directory in Visual Studio Code
 
-- cd <name of directory>
+- `cd <name of directory>`
   : move into the directory 
 
-- cd 
+- `cd` 
   : takes you back to the root directory of the current drive
 
-- cd ..
+- `cd ..`
   : takes you back one directory
 
-- git init
+- `git init`
   : creates a new repository in the current directory
 
-- git branch
+- `git clone <url>`
+  : clones the repository from the remote repository 
+
+
+- `git branch`
   : let's you know what branch you are working on
 
-- git add .
+- `git add .`
  : will push the current modified or untracked files to the staging area
 
-- git add -A
+- `git add -A`
   : will push **all** modified or untracked files to the staging area
 
-- git remote
+- `git remote`
   : tells you if the repository is linked to a remote repository and its name
 
-- git remote -v
+- `git remote -v`
   : -v stands for verbose. This command will give you the url of the remote repository
 
-- git remote remove origin
+- `git remote remove origin`
   : This will remove the link to the remote repository from the local repository
 
-- git remote add origin <url of remote repository>
+- `git remote add origin <url of remote repository>`
   : This will link the local repository to the remote repository
 
-- git push -u origin main
+- `git push -u origin main`
   : This will push the current version of the local repository upstream to the remote repository onto the main branch
 
-- git checkout <branch name>
+- `git checkout <branch name>`
   : to switch to another branch
 
-- git checkout -b "new branch name"
+- `git checkout -b "new branch name"`
   : to switch to a brand new branch
 
-- git commit -m "commit message"
+- `git commit -m "commit message"`
   : makes a commit of any files that are in the staging area and adds a commit message
 
-- git commit 
+- `git commit` 
   : same as above, except you will be given the option to be able to add a commit message and a description of the commit
+
+- `git cp`
+  : copy file(s) and/or directories
+    
+
 
 ### User Story & Acceptance Criteria
 
