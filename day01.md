@@ -118,7 +118,15 @@ The **Four Cornerstones** of computational thinking are:
 
 - `git cp`
   : copy file(s) and/or directories
-    
+
+- `git pull`
+  : downloads latest changes into the local repository, and it also automatically merges change in your working directory. It doesn't give you a chance to review the changes before merging, and as a consequence, 'merge conficts' can and do occur. One **important** thing to keep in mind is that it will merge only into the current working branch. *Other branches will stay unaffected.*
+
+- `git fetch`
+  : only downloads latest changes into the local repository. It downloads fresh changes that other developers have pushed to the remote repository since the last fetch and allows you to review and merge manually at a later time using git merge.
+
+- `git merge`
+  : the concept of git merging is basically to merge multiple sequences of commits, stored in multiple branches into a single branch. 
 
 
 ### User Story & Acceptance Criteria
