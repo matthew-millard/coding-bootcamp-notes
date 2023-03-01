@@ -6,6 +6,9 @@
     - [Computaional Thinking](#Computational-Thinking)
     - [Git & Command Line](#Git-&-Command-Line)
     - [User Story & Acceptance Criteria](#User-Story-&-Acceptance-Criteria)
+- [Day 02](#Day-02)
+  - [Set Up a Local Repository](#Local-Repository)
+
 
 ## Day 01
 
@@ -155,3 +158,30 @@ Acceptance criteria can be presented in various ways. In this case, we'll use a 
 format.
 
 
+### Set Up a Local Repository
+
+There are two ways to setup a local git repository
+
+Clone an existing repository from a remote repository
+
+- To clone an existing repository onto your local machine we have to create a new repository on Github, GitLab or Bitbucket first. Give the repository a name and description. Choose to make it *public or private*. Initialize the repository with a *README file*. Add a .gitignore using a *node* template. Choose a *MIT* license.
+
+- Next we have to establish a link from the remote repository to our local directory where we would like the repository to live. Move into the directory on your local computer where you would like to clone the remote repo to and enter the follow:
+`git clone <url>`
+
+- This will do two things. It will make a copy of the remote repo to our local machine and it will also establish a link from our remote repo to our local repo.
+
+
+Create a local repository on our computer
+
+- Locate the directory that we wish to create the new repository in the terminal.
+- Enter the git command `git init`. This will initialize the directory into a repository.
+- Hop over to Github and create a new repository. *This time, do not  initialize the repository. Skip this step if you are importing an existing repository.*
+
+- If you would like to create a README.md file in your local repo, use the command line command `touch README.md`.
+
+- If we have any existing files in our local repo, we must stage and then commit these files. To stage the files `git add .` or `git add -A`, this will push all untracked files to the staging area. Next, we have to commit these files `git commit -m "Intial commit"`.
+
+- Next, we have to establish a link from our local repo to our remote repo. In the terminal, type `git remote add origin <url>`. This will create the link to the remote repo that we created earlier.
+
+- Lastly, we need to import our local repo into our remote. Type `git push -u origin main`. This will push the local repo upstream into our remote main branch.
