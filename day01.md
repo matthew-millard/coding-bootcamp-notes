@@ -3,11 +3,12 @@
 ## Table of Contents
 
 - [Day 01](#Day-01)
-    - [Computaional Thinking](#Computational-Thinking)
-    - [Git & Command Line](#Git-&-Command-Line)
-    - [User Story & Acceptance Criteria](#User-Story-&-Acceptance-Criteria)
+  - [Computaional Thinking](#Computational-Thinking)
+  - [Git & Command Line](#Git-&-Command-Line)
+  - [User Story & Acceptance Criteria](#User-Story-&-Acceptance-Criteria)
 - [Day 02](#Day-02)
   - [Set Up a Local Repository](#Local-Repository)
+  - [HTML Attributes](#HTML-Attributes)
 
 
 ## Day 01
@@ -131,10 +132,9 @@ The **Four Cornerstones** of computational thinking are:
 - `git merge`
   : the concept of git merging is basically to merge multiple sequences of commits, stored in multiple branches into a single branch. 
 
-
 ### User Story & Acceptance Criteria
 
-**User Stories** 
+**User Stories**
 When you create websites or web applications, you typically do not work on them in isolation for your own enjoyment. It's more likely that you're creating something that will be used by someone else. The first step then is to identify who that user is. If you start building something without a clear idea of the intended user, you might end up with something functional and pretty that doesn't meet the user's needs. And if it doesn't meet your user's needs, it won't be successful.
 
 That's where user stories come in. A user story is simply a short description of the user you're creating an application for. It ensures that you keep your audience in mind when working on the different parts, or features, of your applications.
@@ -154,9 +154,10 @@ Ex.
 **Acceptance Criteria**
 These are the requirements that you must meet to satify the scope of work. They are not exhaustive, but they do entail the minimum aspects of a working solution. Consider this a checklist of baseline requirements.
 
-Acceptance criteria can be presented in various ways. In this case, we'll use a criteria format called scenario-oriented criteria which expresses each requirement in a **When / Then** 
+Acceptance criteria can be presented in various ways. In this case, we'll use a criteria format called scenario-oriented criteria which expresses each requirement in a **When / Then**
 format.
 
+## Day 02
 
 ### Set Up a Local Repository
 
@@ -185,3 +186,21 @@ Create a local repository on our computer
 - Next, we have to establish a link from our local repo to our remote repo. In the terminal, type `git remote add origin <url>`. This will create the link to the remote repo that we created earlier.
 
 - Lastly, we need to import our local repo into our remote. Type `git push -u origin main`. This will push the local repo upstream into our remote main branch.
+
+
+### HTML Attributes
+
+>An attribute extends an HTML element, changing its behavior or providing metadata.
+>An attribute always has the form `name="value"` (the attribute's identifier followed by its associated value).
+>You may see attributes without the equals sign or a value. That is a shorthand for providing the empty string in HTML, or the attributes's name in XML.
+
+ex.
+
+```HTML
+<input required />
+<!-- is the same as… -->
+<input required="" />
+<!-- or -->
+<input required="required" />
+```
+
