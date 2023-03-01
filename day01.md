@@ -204,3 +204,84 @@ ex.
 <input required="required" />
 ```
 
+### CSS Selectors
+
+[Mozilla Attribute Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors)
+[Mozilla CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)
+
+Basic Selectors
+
+- Universal Selector: `*` will match all the elements of the document.
+
+- Type Selector: selects all elements that have the given node name. `body` `header` `main` `section` `footer` 
+
+- Class Selector: selects all elements that have the given class attribute. `.container` `.card` `.card__content` `card__title` 
+The syntax for the class attribute: `class="given-class-name"`
+
+- ID Selector: selects an element based on the value of its `id` attribute. *There should be only one element with a given ID in a document. `#card-1` `#fb-icon` `#linkedin-icon` 
+The syntax for the id attribute: `id="given-id-name"`
+
+- Attribute Selectors: select all elements that have the given attribute. `[attr]` `[attr=value]` `[attr~=value]` `[attr|=value]` `[attr^=value]` `[attr$=value]` `[attr*=value]` 
+
+```CSS
+/* <a> elements with a title attribute */
+a[title] {
+  color: purple;
+}
+
+/* <a> elements with an href matching "https://example.org" */
+a[href="https://example.org"]
+{
+  color: green;
+}
+
+/* <a> elements with an href containing "example" */
+a[href*="example"] {
+  font-size: 2em;
+}
+
+/* <a> elements with an href ending ".org" */
+a[href$=".org"] {
+  font-style: italic;
+}
+
+/* <a> elements whose class attribute contains the word "logo" */
+a[class~="logo"] {
+  padding: 2px;
+}
+```
+
+Combinators
+
+- Selector List: a comman-seperated list of selectors. *Both span and div elements will be styled with the border value.*
+
+```CSS
+span,
+div {
+  border: red 2px solid;
+}
+```
+
+- Single line grouping
+
+``` CSS
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: helvetica;
+}
+```
+
+- Multi line grouping
+
+``` CSS
+#main,
+.content,
+article,
+h1 + p {
+  font-size: 1.1em;
+}
+```
