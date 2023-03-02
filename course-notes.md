@@ -317,7 +317,7 @@ Property Values:
 - none: it will not display the element and remove any space it held in the layout.
 - inline: is the default value. 
 - block: it sets the element to block-level.
-- inline-block: it sets the element to a block box inside an inline box. This is required often to change an inline element into a inline-block so you can apply margins and padding.
+- inline-block: it sets the element to a block box inside an inline box. This is required often to change an inline element into a inline-block so you can apply top and bottom margins.
 
 Simply put, `display: none;` completely gets rid of the tag, as it had never existed in the HTML page whereas `visibility: hidden;` just makes the tag invisible, it will still sit on the HTML page occupying space, it's just invisible.
 
