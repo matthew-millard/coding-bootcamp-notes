@@ -9,6 +9,8 @@
 - [Day 02](#Day-02)
   - [Set Up a Local Repository](#Local-Repository)
   - [HTML Attributes](#HTML-Attributes)
+- [Day 03](#Day-03)
+  - [CSS Visibility vs Display Property](#CSS-Properties)
 
 
 ## Day 01
@@ -285,3 +287,40 @@ h1 + p {
   font-size: 1.1em;
 }
 ```
+
+## Day 03
+
+### CSS Visibility vs Display Property
+
+- The `visibility: hidden;` property is used to specify whether an element is visible or not in a web document, however, it is important to note that the hidden elements take up space in the web document. *The visibility is a property in CSS that specifies the visibility behaviour of an element.*
+
+- The `display: none;`property is used to specify whether an element exists or not on the website. It defines how the components (such as div, hyperlinks, headings, etc) are going to be placed on the web page.
+
+visibility syntax:
+```CSS
+visibility: visible | hidden | collapse | initial | inherit;
+```
+
+Property Values:
+- visible: is the default value.
+- hidden: the element is not visible, but the layout is still affected. The element may not be seen, but it still keeps the space.
+- collapse: hides the element when it is used on a table row or a cell.
+- initail: will set the visibility to its default value.
+- inherit: it will inherit the property value from its parent element.
+
+display syntax:
+```CSS
+display: none | inline | block | inline-block;
+```
+
+Property Values:
+- none: it will not display the element and remove any space it held in the layout.
+- inline: is the default value. 
+- block: it sets the element to block-level.
+- inline-block: it sets the element to a block box inside an inline box. This is required often to change an inline element into a inline-block so you can apply margins and padding.
+
+Simply put, `display: none;` completely gets rid of the tag, as it had never existed in the HTML page whereas `visibility: hidden;` just makes the tag invisible, it will still sit on the HTML page occupying space, it's just invisible.
+
+
+
+
