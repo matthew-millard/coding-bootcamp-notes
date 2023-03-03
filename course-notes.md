@@ -78,6 +78,9 @@ The **Four Cornerstones** of computational thinking are:
 - `cd ..`
   : takes you back one directory
 
+- `rm -rf .git`
+  : removes repository from the directory
+
 - `git init`
   : creates a new repository in the current directory
 
@@ -407,3 +410,106 @@ Is actually a value that overwrites the position value and sets it to the defaul
 Inherit:
 The element **inherits** the parent's position value and sets it as its own.
 
+---
+
+Float
+
+- The `float` property specifies whether an element should float to the left, right, or not at all. The default value is none.
+
+*Note: Absolutely positioned elements ignore the `float` property!*
+*Note: Elements next to a floating elemetn will flow around it. To avoid this, use the `clear` property of the clearfix hack.*
+
+Syntax:
+`float: none | left | right | initial | inherit;`
+
+Clear
+
+- The clear property specifies what should happen with the element that is next to a floating element.
+
+- When we use the float property, and we want the next element below (not on right or left), we will have to use the `clear` property.
+
+The `clear` property can have one of the following values:
+
+- none: This is the default. The element is not pushed below left or right of floated elements.
+
+- left: the element is pushed below left floated element.
+
+- right: The element is pushed below right floated element.
+
+- both: The element is pushed below both left and right floated elements.
+
+- inherit: The element inherits the clear value from its parent.
+
+---
+
+Z Index
+`z-index` is a css property that defines the order of overlapping HTML elements. Elements with a higher index will be placed on top of elements with a lower index.
+
+*Note: `z-index` only works on positioned elements (`position: absolute`, `position: relative`, or `position: fixed`).
+
+The default value is auto.
+Syntax:
+`z-index: 1 | 0 | -5 | 100 | inherit | initial | unset;`
+
+Example:
+
+```HTML
+<div class="container">
+  <div class="box box--one"></div>
+  <div class="box box--two"></div>
+  <div class="box box--three"></div>
+  <div class="box box--four"></div>
+</div>
+```
+
+```CSS
+.container {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  border: 5px solid black;
+  background-color: pink;
+}
+
+.box {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border: 3px solid black;
+  
+}
+
+.box--one {
+  background-color: green;
+  z-index: 4;
+  top: 225px;
+  left: 225px;
+}
+
+.box--two {
+  background-color: red;
+  z-index: 3;
+  top: 250px;
+  left: 250px;
+}
+
+.box--three {
+  background-color: blue;
+  z-index: 2;
+  top: 275px;
+  left: 275px;
+}
+
+.box--four {
+  background-color: yellow;
+  z-index: 1;
+  top: 300px;
+  left: 300px;
+}
+```
+
+![z-index example](./images/z-index-screenshot-example.png)
+
+---
+
+Margin Collasping
