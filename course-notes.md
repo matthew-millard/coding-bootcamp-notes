@@ -2,40 +2,39 @@
 
 ## Table of Contents
 
-- [Day 01](#Day-01)
-  - [Computaional Thinking](#Computational-Thinking)
-  - [Git & Command Line](#Git-&-Command-Line)
-  - [User Story & Acceptance Criteria](#User-Story-&-Acceptance-Criteria)
-- [Day 02](#Day-02)
-  - [Set Up a Local Repository](#Local-Repository)
-  - [HTML Attributes](#HTML-Attributes)
-- [Day 03](#Day-03)
-  - [CSS Visibility vs Display Property](#CSS-Properties)
-
+- [Day 01](#day-01)
+  - [Computaional Thinking](#computational-thinking)
+  - [Git & Command Line](#git-command-line)
+  - [User Story & Acceptance Criteria](#user-story-acceptance-criteria)
+- [Day 02](#day-02)
+  - [Local Repository](#local-repository)
+  - [HTML Attributes](#html-attributes)
+- [Day 03](#day-03)
+  - [CSS Visibility vs Display Property](#css-properties)
 
 ## Day 01
 
 ### Computational Thinking
+
 - Is a way of logically breakdown a problem so that we can develop a step by step solution.
 
 - Break a complex problem into smaller parts, and then developing possible solutions that can be clearly presented in a way that computers and/or humans can understand.
 
 The **Four Cornerstones** of computational thinking are:
 
-   - **Decomposition**
+- **Decomposition**
       : means breaking down a problem into smaller tasks. Breaking a complex problem into smaller problems or subtasks makes solving the larger problem         more manageable.
-      
-   - **Pattern Recognition**
+
+- **Pattern Recognition**
       : Thinking about how we've solved these subtasks previously and finding any patterns that might help us to solve this particular problem.
-      
-   - **Abstraction**
+
+- **Abstraction**
       : Is only focusing on relevant information and that we are disregarding details that won't help us solve this problem.
-      
-   - **Testing & Debugging Algorithms**
+
+- **Testing & Debugging Algorithms**
       : An algorithm is essentially a sequence of steps or rules that we can use to solve our problem. Think of it as a set of instructions and a recipe.
 
-
-### Git & Command Line
+### Git Command Line
 
 - `pwd`
   : Print working directory
@@ -51,18 +50,18 @@ The **Four Cornerstones** of computational thinking are:
 
 - `rm <file name>`
   : remove file
-    
+
 - `ls`
   : lists all files and directories within the current directory
-    
+
 - `ls -1`
   : same as above, however, lists on individual lines
-    
+
 - `ls -1a`
   : same as above, however, includes any hidden files
 
 - `touch <file name>`
-  : add file ls 
+  : add file ls
 
 - `open <file name>`
   : opens file
@@ -71,7 +70,7 @@ The **Four Cornerstones** of computational thinking are:
   : will open directory in Visual Studio Code
 
 - `cd <name of directory>`
-  : move into the directory 
+  : move into the directory
 
 - `cd` 
   : takes you back to the root directory of the current drive
@@ -84,7 +83,6 @@ The **Four Cornerstones** of computational thinking are:
 
 - `git clone <url>`
   : clones the repository from the remote repository 
-
 
 - `git branch`
   : let's you know what branch you are working on
@@ -134,7 +132,7 @@ The **Four Cornerstones** of computational thinking are:
 - `git merge`
   : the concept of git merging is basically to merge multiple sequences of commits, stored in multiple branches into a single branch. 
 
-### User Story & Acceptance Criteria
+### User Story Acceptance Criteria
 
 **User Stories**
 When you create websites or web applications, you typically do not work on them in isolation for your own enjoyment. It's more likely that you're creating something that will be used by someone else. The first step then is to identify who that user is. If you start building something without a clear idea of the intended user, you might end up with something functional and pretty that doesn't meet the user's needs. And if it doesn't meet your user's needs, it won't be successful.
@@ -148,9 +146,11 @@ A user story consists of the following three sections:
 - Why the user wants what they want (i.e., what problem are they trying to solve?)
 
 Format
+
 - As an ... I want ... so that ...
 
-Ex. 
+Ex.
+
 - As a shopper visiting an online store, I want to place items in a shopping cart, so that I can purchase them.
 
 **Acceptance Criteria**
@@ -159,9 +159,11 @@ These are the requirements that you must meet to satify the scope of work. They 
 Acceptance criteria can be presented in various ways. In this case, we'll use a criteria format called scenario-oriented criteria which expresses each requirement in a **When / Then**
 format.
 
+---
+
 ## Day 02
 
-### Set Up a Local Repository
+### Local Repository
 
 There are two ways to setup a local git repository
 
@@ -173,7 +175,6 @@ Clone an existing repository from a remote repository
 `git clone <url>`
 
 - This will do two things. It will make a copy of the remote repo to our local machine and it will also establish a link from our remote repo to our local repo.
-
 
 Create a local repository on our computer
 
@@ -189,6 +190,7 @@ Create a local repository on our computer
 
 - Lastly, we need to import our local repo into our remote. Type `git push -u origin main`. This will push the local repo upstream into our remote main branch.
 
+---
 
 ### HTML Attributes
 
@@ -205,6 +207,8 @@ ex.
 <!-- or -->
 <input required="required" />
 ```
+
+---
 
 ### CSS Selectors
 
@@ -288,6 +292,8 @@ h1 + p {
 }
 ```
 
+---
+
 ## Day 03
 
 ### CSS Visibility vs Display Property
@@ -297,11 +303,13 @@ h1 + p {
 - The `display: none;`property is used to specify whether an element exists or not on the website. It defines how the components (such as div, hyperlinks, headings, etc) are going to be placed on the web page.
 
 visibility syntax:
+
 ```CSS
 visibility: visible | hidden | collapse | initial | inherit;
 ```
 
 Property Values:
+
 - visible: is the default value.
 - hidden: the element is not visible, but the layout is still affected. The element may not be seen, but it still keeps the space.
 - collapse: hides the element when it is used on a table row or a cell.
@@ -309,18 +317,93 @@ Property Values:
 - inherit: it will inherit the property value from its parent element.
 
 display syntax:
+
 ```CSS
 display: none | inline | block | inline-block;
 ```
 
 Property Values:
+
 - none: it will not display the element and remove any space it held in the layout.
-- inline: is the default value. 
+- inline: is the default value.
 - block: it sets the element to block-level.
 - inline-block: it sets the element to a block box inside an inline box. This is required often to change an inline element into a inline-block so you can apply top and bottom margins.
 
 Simply put, `display: none;` completely gets rid of the tag, as it had never existed in the HTML page whereas `visibility: hidden;` just makes the tag invisible, it will still sit on the HTML page occupying space, it's just invisible.
 
+---
 
+### Position in CSS
 
+There are 7 values to the **Position** property:
+
+- Static
+- Initial
+- Inherit
+- Relative
+- Sticky
+- Absolute
+- Fixed
+
+---
+
+Static:
+Is the default value. The a position property and value is only applied when we want the element to not behave static.
+Static basically loads the elements in a top down approach. The elements will be loaded in the sequence they were written.
+
+Relative:
+The relative position supports offset properties like (left, right, top, bottom).
+So defining the position as relative, then you can offset properties like left, right, top and bottom to move the position of the element which will be relative to its normal position (in the HTML flow) based on those properties.
+
+Absolute:
+Absolute positioning allows us to move the element(s) relative to only its parent (non-static position element).
+*Note: the parent element does not have to be its direct parent element, it can any ancestor element.*
+
+Lets say we have an image inside a div container. We can move the position of the image using the absolute property with the offset properties relative to the div. Remember the div must not be static position. So we can apply a `position: relative` rule to the div container.
+
+```HTML
+<div class="container">
+  <img src="./assets/images/random-image.jpg" id="image-1">
+</div>
+```
+
+```CSS
+.container {
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+#image-1 {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+```
+
+*The above example would center the image relative to the div container.*
+
+It is important to note that you must be careful while using absolute value, as its hard to maintain an can cause problems with the site's responsiveness.
+
+Fixed:
+Fixed behaves similar to absolute but with one clear difference. The position of the element is not relative to the parent element but rather it is relative to the **viewport** (document screen).
+
+- Fixed position is generally used for creating modal popups, sticky navigation bars and footers.
+
+*Note: be careful while using fixed positon as you will be positioning elements directly on the viewport.*
+
+Sticky:
+The sticky position is a special position value, as it behaves bot like a *relative* positioned element as well as a *fixed* positioned element.
+
+The element is position relative to the HTML document, but this position changes to fixed, when the element passes a certain scroll point. So the element will stay fixed relative to the viewport. The element will change back to relative, once the element has rollback into the threshold value.
+*Note: for fixed to work, an offset value has to be provided like top, bottom, left or right.
+
+Intial:
+Is actually a value that overwrites the position value and sets it to the default value static.
+
+Inherit:
+The element **inherits** the parent's position value and sets it as its own.
 
