@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Day 01](#day-01)
-  - [Computaional Thinking](#computational-thinking)
+  - [Computational Thinking](#computational-thinking)
   - [Git & Command Line](#git-command-line)
   - [User Story & Acceptance Criteria](#user-story-acceptance-criteria)
 - [Day 02](#day-02)
@@ -11,6 +11,8 @@
   - [HTML Attributes](#html-attributes)
 - [Day 03](#day-03)
   - [CSS Visibility vs Display Property](#css-properties)
+- [Day 04](#day-04)
+  -[Media Queries](#media-queries)
 
 ## Day 01
 
@@ -299,7 +301,7 @@ h1 + p {
 
 ## Day 03
 
-### CSS Visibility vs Display Property
+### CSS Properties
 
 - The `visibility: hidden;` property is used to specify whether an element is visible or not in a web document, however, it is important to note that the hidden elements take up space in the web document. *The visibility is a property in CSS that specifies the visibility behaviour of an element.*
 
@@ -512,4 +514,87 @@ Example:
 
 ---
 
-Margin Collasping
+Margin Collapsing
+
+## Day 04
+
+### Media Queries
+
+Media queries ca be used to check many things, such as:
+
+- width and height of the viewport
+
+- width and height of the device
+
+- orientation (landscape or portrait mode)
+
+- resolution
+
+Syntax:
+`@media not|only *media type* and (expression) {
+  *CSS code*
+}`
+
+Example:
+```CSS
+@media screen and (max-width: 700px) {
+  .header {
+    flex-direction: column;
+  }
+}
+```
+
+<!-- If the device screen and viewport is 700px or less in width (true) then apply the following css rules within the  -->
+
+Media Types
+
+- all: used for all media type devices
+
+- print: used for printers
+
+- screen: used for all devices with screens
+
+- speech: used for screen-readers
+
+
+Mobile First Design
+
+Mobile first means designing for mobile before designing for desktop or any other device. 
+*Note: This wil make the page display faster on smaller devices.*
+
+Instead of changing styles when the width gets smaller, we should change the design when the width gets larger. This is mobile first design.
+
+The value of the condition at which the media query changes from false to true is known as a breakpoint.
+
+Example:
+
+```CSS
+@media screen and (min-width: 400px) and (max-width: 1440px) {
+  .main {
+    flex-direction: column;
+  }
+}
+```
+
+<!-- The above example has two break points. One at 400px and the other at 1440px. -->
+
+Typical Device Breakpoints
+There are tons of screens and devices with different heights and widths, so it is hard to create an exact breakpoint for each device. To keep things simple you could target five groups:
+
+```CSS
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px)v {...}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@meda only screen and (min-width: 600px) {...}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
+```
+
