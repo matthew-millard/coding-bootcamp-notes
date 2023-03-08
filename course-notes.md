@@ -716,4 +716,59 @@ If you use this method, be sure to clearly mark the reset section of the style s
 
 There is a new technique that takes a slightly different approach: normalize.css. Instead of trying to eliminte the default browser styles, the normalize.css instead tries to normalize them to standard values across browsers. This removes some of the downsides of certain copy paste resets such as the **Meyer Reset**. It is also a newer and actively developed stylesheet, so it includes more modern HTML elements.
 
+### Typography
+
+#### Web Fonts
+
+Most people don't ever intentionally install typefaces on their computers. Instead, they simply rely on the typefaces that get installed with the operating system and other software.
+
+Web Safe Fonts
+
+If we ask for a font that the user doesn't have the font will:
+
+- not display.
+
+- A different font is used instead (usually chosen by the browser)
+
+As designers, we **always** want to have control of the font veing rendered.
+
+### Font Stacks
+
+When specifying fonts for web pages, we use a system of 'fallbacks', called a **font stack**
+
+The font stack allows us to:
+
+1. choose the font we want most
+
+2. choose the font we want if the first one isn't available
+
+3. choose any number of other fonts that we might want to fallback on
+
+4. choose a last resort font
+
+This allows us to be sure that we have some control over what font is displayed in our website. Even if the user doesn't have our first choice font, they have some font that **we chose**. 
+
+When selecting your font stacks, you should choose several fonts that are the same type of font (serif, sans serif, slab serif, script, etc.).
+
+You should also consider the spacing and x-height of a typeface. They can look drastically different if not chosen carefully. Additionally, some typefaces will take up much more space than others, causing your layout to differ significantly depending on the typeface rendered.
+
+- Sample comparison of two serif typefaces
+
+- Sample comparison of two sans-serif typefaces
+
+- Real life example with News Gothic
+
+- They should be listed in order of your preference and also by prevalence.
+
+Your second-to-last font choice should be installed on most systems.
+
+The last choice is mostly just there to make sure the right classification of font shows up if all else fails. We hope to never get to this point, but just in case.
+
+### Why should we care about web safe fonts
+
+- Bulletproof fallbacks - we need to specify reasonable alternatives to our custom fonts
+
+- Performance - fonts that are not on a user's computer need to be downloaded and will take longer to load and consume more bandwidth
+
+- Accessibility - web safe fonts have generally been designed for the screen with readability in mind. Other fonts, not necessarily.
 
