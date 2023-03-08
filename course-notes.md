@@ -598,3 +598,72 @@ There are tons of screens and devices with different heights and widths, so it i
 @media only screen and (min-width: 1200px) {...}
 ```
 
+### Flexbox
+
+When we apply the CSS property `display: flex;`, there is a whole lot of other properties that will be applied to the child elements. It is as if we wrote these default stylings ourselves:
+
+```CSS
+.child {
+  flex: 0 1 auto; /* Default flex value */
+}
+```
+
+The flex property above is a shorthand property. It is the same as:
+
+```CSS
+.child {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+```
+
+The flex property tells the child elements how to stretch and expand.
+
+Like about it like this:
+
+```CSS
+.child {
+  flex: [flex-grow] [flex-shrink] [flex-basis];
+}
+
+/* or */
+
+.child {
+  flex: [max] [min] [ideal size];
+}
+
+
+- `flex-grow: 0;` is the default value. This makes sense as we don't want our elements to expand at all (most of the time).
+We normally want the element to grow naturally depending on the content inside it.
+
+If we change the `flex-grow: 1` to all the .child elements, then they will take an equal portion of the .parent element.
+*Note: only if the lengths of their contents are the same.*
+
+![Flexbox demo `flex-grow: 1`](./images/Screen%20Shot%202023-03-07%20at%208.17.28%20AM.png)
+
+If you just declare the flex-grow property and not the flex-shrink or flex-basis, not to worry, they will just use their default 
+values.
+
+Say we wanted to make one of the .child elements grow more than the others?
+
+```CSS
+.child {
+  /* flex: 0 1 auto; */
+}
+
+.child-1 {
+  flex-grow: 3;
+}
+```
+
+Look at it like this:
+`flex: [max] [min] [ideal size];`
+
+Try remember this:
+
+- Use the flex shorthand
+
+- Remember max, min and ideal size when doing so
+
+- Remember that the content of an element can impact how these values work together, too.
