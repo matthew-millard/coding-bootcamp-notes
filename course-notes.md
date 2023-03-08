@@ -13,6 +13,9 @@
   - [CSS Visibility vs Display Property](#css-properties)
 - [Day 04](#day-04)
   -[Media Queries](#media-queries)
+  -[Flexbox](#flexbox)
+- [Day 05](#day-05)
+  -[CSS Reset](#css-resets)
 
 ## Day 01
 
@@ -667,3 +670,50 @@ Try remember this:
 - Remember max, min and ideal size when doing so
 
 - Remember that the content of an element can impact how these values work together, too.
+
+## Day 05
+
+### CSS Resets
+
+A CSS reset style sheet is a list of rules that 'reset' all of the default browser styles.
+
+We reset the browser styles for two primary reasons:
+
+- **Not all browsers apply the same default rules.** They may be similar, but not exact.
+
+- Once you start designing and coding all of the fine details of your site, you may discover that a lot of what you are doing is simply **overriding** default browser styles.** The reset does this quickly so that you don't have to.
+
+#### Including the Reset Style sheet using severall different methods.
+
+We can use the reset style sheet as an external style sheet just like we do with our normal styles. 
+**Note: It is important that we add it first**, since order matters.
+
+```HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Example</title>
+</head>
+<body>
+    
+</body>
+</html>
+```
+
+#### Copy and Paste Into Own Style Sheet
+
+You can also simply copy all of the rules from the reset style sheet and paste them into your own.
+**Note: Make sure that you put them at the top so that they don't override any of your rules.**
+
+If you use this method, be sure to clearly mark the reset section of the style sheet and give credit to the author using CSS comments.
+
+#### Normalize Style Sheet
+
+There is a new technique that takes a slightly different approach: normalize.css. Instead of trying to eliminte the default browser styles, the normalize.css instead tries to normalize them to standard values across browsers. This removes some of the downsides of certain copy paste resets such as the **Meyer Reset**. It is also a newer and actively developed stylesheet, so it includes more modern HTML elements.
+
+
