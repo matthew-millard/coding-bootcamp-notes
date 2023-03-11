@@ -16,6 +16,7 @@
   -[Flexbox](#flexbox)
 - [Day 05](#day-05)
   -[CSS Reset](#css-resets)
+- [Day 06](#day-06)
 
 ## Day 01
 
@@ -771,4 +772,265 @@ The last choice is mostly just there to make sure the right classification of fo
 - Performance - fonts that are not on a user's computer need to be downloaded and will take longer to load and consume more bandwidth
 
 - Accessibility - web safe fonts have generally been designed for the screen with readability in mind. Other fonts, not necessarily.
+
+
+
+## Day 06
+
+### Pseudo Elements
+
+What are pseudo-elements?
+A css pseudo element is used to style specified parts of an element.
+
+Common examples:
+
+- Style the first letter, or line, of an element
+
+- Insert content before, or after, the content of an element
+
+Syntax:
+
+```CSS
+selector::pseudo-element {
+  property: value;
+}
+```
+
+Ex.
+
+```CSS
+h1::first-line {
+  font-size: 2em;
+  font-family: serif;
+}
+
+h2::first-letter { 
+  font-size: 2em;
+  font-family: serif;
+}
+
+.submit-btn::before {
+  content: "enter content here";
+}
+
+.submit-btn::after {
+  content: url(smiley.gif);
+}
+```
+
+#### Other Pseudo-elements
+
+::marker
+The ::marker pseudo-element selects the markers of list items.
+So you can style how the list markers look essentially. 
+
+```CSS
+::marker {
+  color: green;
+}
+```
+
+::selection
+The ::selection pseudo-elemeent allows you to style the look of the selected element, (like if you are to highlight some text
+with the cursor) and apply a style to that highlight.
+
+---
+
+### CSS Pseudo Classes
+
+### All CSS Pseudo Classes
+
+- `:active`
+  `a:active`
+    Selects the active link
+
+- `:checked`
+  `input:checked`
+    Selects every checked `<input>` element
+
+- `:disabled`
+  `input:disabled`
+    Selects every disabled `<input>` element
+
+- `:empty`
+  `p:empty`
+    Selects every `<p>` element that has no children
+
+- `:enabled`
+  `input:enabled`
+    Selects every enabled `<input>` element
+
+- `:first-child`
+  `p:first-child`
+    Selects every `<p>` elements that is the first child of its parent
+
+- `:first-of-type`
+  `p:first-of-type`
+    Selects every `<p>` element that is the first `<p>` element of its parent
+
+- `:focus`
+  `input:focus`
+    Selects the `<input>` element that has focus
+
+- `:hover`
+  `a:hover`
+    Selects links on mouse over
+
+- `:in-range` `input:in-range`
+    Selects `<input>` elements with a value within a specified range
+
+- `:invalid`
+  `input:invalid`
+    Selects all `<input>` elements with an invalid value
+
+- `:lang`(language)
+  `p:lang(it)`
+    Selects every `<p>` element with a lang attribute value starting with "it"
+
+- `:last-child`
+  `p:last-child`
+    Selects every `<p>` elements that is the last child of its parent
+
+- `:last-of-type`
+  `p:last-of-type`
+    Selects every `<p>` element that is the last `<p>` element of its parent
+
+- `:link`
+  `a:link`
+    Selects all unvisited links
+
+- `:not(selector)`
+  `:not(p)`
+    Selects every element that is not a `<p>` element
+
+- `:nth-child(n)`
+  `p:nth-child(2)`
+    Selects every `<p>`element that is the second child of its parent
+
+- `:nth-last-child(n)`
+  `p:nth-last-child(2)`
+    Selects every `<p>` element that is the second child of its parent, counting from the last child
+
+- `:nth-last-of-type(n)`
+  `p:nth-last-of-type(2)`
+    Selects every `<p>` element that is the second `<p>` element of its parent, counting from the last child
+
+- `:nth-of-type(n)`
+  `p:nth-of-type(2)`
+    Selects every `<p>` element that is the second `<p>`element of its parent
+
+- `:only-of-type`
+  `p:only-of-type`
+    Selects every `<p>` element that is the only `<p>` element of its parent
+
+- `:only-child`
+  `p:only-child`
+    Selects every `<p>` element that is the only child of its parent
+
+- `:optional`
+  `input:optional`
+    Selects `<input>` elements with no "required" attribute
+
+- `:out-of-range`
+  `input:out-of-range`
+    Selects `<input>` elements with a value outside a specified range
+
+- `:read-only`
+  `input:read-only`
+    Selects `<input>` elements with a "readonly" attribute specified
+
+- `:read-write`
+    `input:read-write`
+    Selects `<input>` elements with no "readonly" attribute
+
+- `:required`
+  `input:required`
+    Selects `<input>` elements with a "required" attribute specified
+
+- `:root`
+    Selects the document's root element
+
+- `:target`
+    `#news:target`
+    Selects the current active #news element (clicked on a URL containing that anchor name)
+
+- `:valid`
+  `input:valid`
+    Selects all `<input>` elements with a valid value
+
+- `:visited`
+    `a:visited`
+    Selects all visited links
+
+---
+
+### CSS Combinators
+
+A combinator is something that explains the relationship between the selectors.
+
+A CSS selector can contain more than one simple selector. Between the simple selectors, we can include a combinator.
+
+There are four different combinators in CSS:
+
+- descendant selector (space)
+
+- child selector (>)
+
+- adjacent sibling selector (+)
+
+- general sibling selector (~)
+
+#### Descendent Selector
+
+The descendant selector matches all elements that are descendants of a specified element.
+
+*Note: VS Code has a awesome tooltip when you hover over the selector in the editor. It will inform you the parent element and then which child(s) are getting selected.*
+
+```CSS
+div p {
+  color: red;
+}
+```
+
+#### Child Selector
+
+The child selector selects all elements that are the children of a specified element.
+
+This is best shown with an example:
+
+```CSS
+div > img {
+  width: 50%;
+}
+```
+
+The above example will apply a width of 50% to all images that are child element of a div element.
+
+#### Adjacent Sibling Selector (+)
+
+The adjacent sibling selector is used to select an element that is directly after another specific element.
+Sibling elements must have the same parent element, and "adjacent" means "immediately following".
+
+The following example selects the first `<p>` element that are placed immediately after `<div>` elements:
+
+```CSS
+div + p {
+  background: green;
+}
+```
+
+The above code would select the very next `<p>` element that is a sibling of a `<div>`.
+*Note: Important, it will select the **SIBLING** element, not a **CHILD**.*
+
+#### Genral Sibling Selector (~)
+
+The general sibling selector selects all elements that are next siblings of a specified element.
+
+The following example selects all `<p>` elements that are next siblings of `<div>` elements:
+
+```CSS
+div ~ p {
+  color: red;
+}
+```
 
