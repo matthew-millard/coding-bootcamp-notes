@@ -17,6 +17,9 @@
 - [Day 05](#day-05)
   -[CSS Reset](#css-resets)
 - [Day 06](#day-06)
+  -[CSS Grid](#css-grid)
+- [Day 07](#day-07)
+  -[JavaScritp Basics](#javascript-basics)
 
 ## Day 01
 
@@ -1031,6 +1034,163 @@ The following example selects all `<p>` elements that are next siblings of `<div
 ```CSS
 div ~ p {
   color: red;
+}
+```
+
+---
+
+### CSS Grid
+
+---
+
+## Day 07
+
+### JavaScript Basics
+
+Data types:
+
+1. String: String represets text data in js. You can use singular quote marks ('') or double quote marks ("") to create a string.
+
+2. Number: 44 - A number represents numeric data. You can add `+`, subtract `-`, multiply `*`, divide `/` and find the remainder with modulus `%` operator.
+
+3. Boolean: true | false - Booleans can only either be `true` or `false`.
+
+4. Null: null is a value that is used to indicate “nothingness”. Developers need to explicitly set a value to be null.
+
+5. Undefined: undefined is a value that indicates an absence of a value. We say that something is undefined when it is not explicitly defined.
+
+7. Symbol: a symbol is a new primitive that comes with ES6. You don't need symbols 99% of the time. They are meant for a very unique use case.
+
+8. BigInt: stands for Big Integer. It lets you create extremely large numbers (that cannot be supported by `Number`)
+
+***Note: Null is different from undefined. If you compare null and undefined with the strictly equal operator, you’ll get false.***
+
+#### String Concatenation
+
+Strings can be added together with the + operator. 
+`console.log('Matthew ' + 'Millard')`
+// Matthew Millard
+
+#### Declaring Variables
+
+The variableName
+variableName is the name of the variable you’re declaring. You can name it anything, as long as it follows these rules:
+
+- It must be one word
+- It must consist only of letters, numbers or underscores (0-9, a-z, A-Z, _).
+- It cannot begin with a number.
+- It cannot be any of these reserved keywords
+- If you need to use two or more words to name your variable, you should join the words together, but capitalize the first letter of each subsequent word. This weird capitalization is called camel case.
+
+- The value
+The value is what you want the variable to be. It can be a primitive (like a string and a number etc) or an object (like an array or function).
+
+- `=` in JavaScript
+= in JavaScript doesn’t work like = in Math. Don’t get confused.
+
+In JavaScript, = means assignment. When you use =, you set (or assign) the value on the right hand side (RHS) of the = sign to the left hand side (LHS) of the = sign.
+
+- Evaluation before assignment
+Variables can only take up one value each. If you have an equation that needs to be evaluated on the RHS, it must be evaluated before it can be assigned to a variable.
+
+#### const vs let vs var
+
+- `const` and `let` are keywords made available to us in ES6. They are better keywords to create variables than `var`.
+
+- const: If you declare a variable with const, you cannot assign it with a new value.
+
+- let: If you declare a variable with let, you can assign it with a new value.
+
+### If/else Statements
+
+``` javascript
+if (condition === true) {
+  // Then run this code block and exit.
+} else if (condition === true) {
+  // Then run this code block and exit.
+} else {
+  // If they both do not evalute to true, then run this code block.
+}
+```
+
+If the first condition evaluates to true, JavaScript executes the code in the if block.
+
+If the first condition evaluates to false, JavaScript checks the condition in the next else if block and see whether it evaluates to true. It goes on and on until all else if blocks are exhausted.
+
+To check whether a condition evaluates to true or false, JavaScript relies on two things:
+
+Comparison operators
+Truthy and falsey values.
+
+#### Comparison Operators
+
+There are four main types of comparison operators:
+
+Greater than (>) or greater or equals to (>=)
+Smaller than (<) or smaller or equals to (<=)
+Strictly equal (===) or equal (==)
+Strictly unequal (!==) or unequal (!=)
+
+=== vs == (or !== vs !=)
+JavaScript is a loosely-typed language. What this means is that, when we declare variables, we don’t care what type of value goes into the variable.
+You can declare any primitive or object, and JavaScript does the rest for you automatically.
+
+When comparing things with strictly equal (===) or strictly unequal (!==), JavaScript checks two things:
+
+- The type of the variable
+
+- The value of the variable
+
+When comparing things with equal (==) or unequal (!=), JavaScript converts (or casts) the types so they match each other.
+
+- ***Generally, JavaScript tries to convert all types to numbers when you use a comparison operator. In the example below, the string 24 is converted into the number 24 before the comparison. That’s why a string of 24 equates to a number of 24 when you use ==.***
+
+- Booleans can also be converted into numbers. When JavaScript converts Booleans into numbers, true becomes 1 and false becomes 0.
+
+***Important: Automatic type conversion (when using comparison operators) is one of the common causes of hard-to-find bugs. Whenever you compare for equality, always use the strict versions (=== or !==).***
+
+- In JavaScript, each object has a “identity card”. This identity card is called the ***reference*** to the object. When you compare objects with equality operators, you’re asking JavaScript to check if the two objects have the same reference (same identity card).
+
+#### Truthy and Falsey
+
+Truthy and Falsey
+If you write a single variable (like numApples in the example below) as the condition of an if/else statement, JavaScript checks for a truthy or a falsey value.
+
+``` javascript
+const numApples = 135
+
+if (numApples) {
+  // Eat an apple
+} else {
+  // Buy an apples
+}
+```
+
+- A falsey value is a value that evaluates to false when converted into a boolean. There are six possible falsey values in JavaScript:
+
+1.false
+2.undefined
+3. null
+4. 0 (numeric zero)
+5. "" (empty string)
+6. NaN (Not A Number)
+
+A truthy value, on the other hand, is a value that evaluates to true when converted into a Boolean. In the case of numbers, anything that’s not 0 converts to true.
+
+Automatic type conversion to truthy and falsey values are highly encouraged in JavaScript, because they make code shorter and easier to comprehend.
+For example, if you want to check if a string is empty, you can use the string in the condition straightaway.
+
+#### The NOT Operator
+
+- The NOT operator (!) flips truthy and falsey values around. Truthy values becomes false while falsey values become true.
+
+The NOT operator can be used to eliminate else statements, like this:
+
+``` javascript
+const str = ''
+
+if (!str) {
+  // Only do something if string is empty (NOT truthy)
 }
 ```
 
