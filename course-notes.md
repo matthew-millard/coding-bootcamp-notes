@@ -20,6 +20,10 @@
   -[CSS Grid](#css-grid)
 - [Day 07](#day-07)
   -[JavaScritp Basics](#javascript-basics)
+- [Day 08](#day-08)
+  -[For Loop](#for-loop)
+  -[Type Coercion](#type-coercion)
+- [Day 09](#day-09)
 
 ## Day 01
 
@@ -1143,7 +1147,7 @@ When comparing things with strictly equal (===) or strictly unequal (!==), JavaS
 
 When comparing things with equal (==) or unequal (!=), JavaScript converts (or casts) the types so they match each other.
 
-- ***Generally, JavaScript tries to convert all types to numbers when you use a comparison operator. In the example below, the string 24 is converted into the number 24 before the comparison. That’s why a string of 24 equates to a number of 24 when you use ==.***
+- ***Generally, JavaScript tries to convert all types to numbers when you use a comparison operator. The string 24 is converted into the number 24 before the comparison. That’s why a string of 24 equates to a number of 24 when you use ==.***
 
 - Booleans can also be converted into numbers. When JavaScript converts Booleans into numbers, true becomes 1 and false becomes 0.
 
@@ -1154,7 +1158,7 @@ When comparing things with equal (==) or unequal (!=), JavaScript converts (or c
 #### Truthy and Falsey
 
 Truthy and Falsey
-If you write a single variable (like numApples in the example below) as the condition of an if/else statement, JavaScript checks for a truthy or a falsey value.
+If you write a single variable as the condition of an if/else statement, JavaScript checks for a truthy or a falsey value.
 
 ``` javascript
 const numApples = 135
@@ -1194,3 +1198,246 @@ if (!str) {
 }
 ```
 
+## Day 08
+
+### Loops
+
+#### For Loop
+
+A for loop runs a block of code as many times as you want to.
+Here's a for loop that logs each value in the array:
+
+``` javascript
+const myArray = ['Matthew', 'Millard', 34, 'Scotland', true]
+for (let i = 0; i < myArray.length; i++) {
+    console.log(myArray[i])
+}
+```
+
+``` javascript
+const numbers = [25, 22, 12, 56, 8, 18, 34]
+for (let i = 0; i < numbers.length; i++) {
+  const num = numbers[i]
+  if (num < 20) {
+    console.log(num + ' is less than 20!')
+  }
+}
+```
+
+***Infinite loops: Infinite loops occur when the condition for a loop always return true. Your browser will hang if you run an infinite loop.***
+
+Looping through Arrays
+
+In practise, you always loop through an array or object. When you loop (or iterate) through an array, you go through each item in the array once.
+To do so, you can use the length of the array as a condition like both the examples above.
+
+You can also write a for loop with a negative incrementExpression. It runs faster than the positive incrementExpression version, but loops from the last item. Use this if you need to run a super performant app.
+
+``` javascript
+for (let i = myArray.length -1; i >=0; i-- ) {
+  // run code here.
+}
+```
+
+#### The 'for of' loop
+
+A (much better) way to loop through an array to use a for...of loop. This is a new loop syntax that comes with ES6. It looks like this:
+
+``` javascript
+const myFamily = ['Hamish', 'Finn', 'Islay', 'Amy', 'Matthew']
+for (let person of myFamily) {
+  console.log(person)
+}
+```
+
+#### The forEach loop
+
+All arrays contain a forEach method. It helps you loop through every item in an array in a simple-to-read manner.
+
+Syntax:
+
+``` javascript
+array.forEach((currentValue, index, array) => {
+  // Your loop here
+})
+```
+
+- currentValue: refers to the current item in the array.
+
+- index: is the position of the item within the array. The first item has an index of 0; the second, an index of 1; and so on.
+
+- array: refers to the array that you're looping over. Your don't need this argument most of the time.
+
+``` javascript
+const myFamily = ['Hamish', 'Finn', 'Islay', 'Amy', 'Matthew']
+
+myFamily.forEach(person => {
+  console.log(person)
+})
+```
+
+``` javascript
+myFamily.forEach((familyMember, index) => {
+    console.log(`${familyMember} has an index of ${index} in the array.`)
+})
+```
+
+#### For...of vs forEach
+
+You can use either for...of or forEach to loop through all arrays. They do the same thing. I highly suggest you learn forEach properly.
+
+I prefer forEach because it’s easier to read, shorter to write, which means it’s more maintainable and has less room for bugs to hide.
+
+Furthermore, forEach is a good base to help you learn more advanced array methods like map, filter, reduce, find, some and every. Each method mentioned does a specific thing that’s way more useful than forEach or even for...of.
+
+#### While Loop
+
+A while statement will create a loop around a code block that will continue to iterate and execute that code block as long as the condition remains true.
+As soon as the condition evalutes to false, the loop cycle breaks and exits the loop.
+
+Syntax:
+
+``` JavaScript
+while (condition) {
+  //code block to be executed
+}
+```
+
+Example:
+
+``` JavaScript
+cars = ['bmw', 'ferrari', 'aston martin', 'mercedes benz', 'renault', 'fiat',]
+let i = cars.length -1
+while (i >= 0) {
+  console.log(cars[i])
+  i--
+}
+```
+
+---
+
+### Logical Operators
+
+#### AND && operator
+
+The logical AND (&&) operator will evalute and pass as true if **ALL** operands are true. Otherwise it will be false.
+
+``` JavaScript
+const name = 'Matthew'
+const lastName = 'Millard'
+
+if ( name === 'Matthew' && lastName === 'Millard' {
+  // code block will run, as both operands evalute to true.
+})
+```
+
+#### Logical NOT (!)
+
+The logical NOT ( ! ) operator takes truth to falsity and vice versa. It will invert a truthy value to a falsey value for example or vice versa.
+
+``` javascript
+if (!false) {
+  // code block will run.
+}
+```
+
+False becomes true, so the code block will run.
+
+#### Logical OR ( || )
+
+The logical OR operator for a set of operands is true if and only if one or more of its operands is true.
+
+``` javascript
+const a = 5
+const b = -5
+
+if ( a > 0 || b > 0 ) {
+  // if one of the operands evalute to true, this code block will run. 
+}
+```
+
+---
+
+### Type Coercion
+
+Type coercion is converting from one data type to another.
+
+#### Explicit Type Coercion
+
+Example:
+
+``` JavaScript
+let a = '1' // String data type
+a = parseInt(a) // parseInt will convert the string value of '1' to the number data type with the value of 1.
+```
+
+***This is called explicit type coercion, as we are explicitly saying we wish to convert this string into a number.***
+
+Use the function parseFloat() if you wish to have a decimal number. If not, parseInt will convert to a whole number.
+
+To convert a number into a string, we would use the `toString()` function. 
+Ex.
+
+``` JavaScript
+let a = 1.34
+a = a.toString()
+console.log(typeof a) // String will be logged in the console.
+```
+
+Implicit Type Coercion
+This means the computer is taking the type coercion for you automatically. You are not telling the computer to do the type coercion, it is doing it
+on its own.
+
+Generally, when you are dealing with javascript, the best rule of thumb is to always explicitly convert your data types so they are exactly the same, so you don't run into weird bugs related to type coercion.
+
+## Day 09
+
+### Function Declaration vs Funciton Expression
+
+Function Declaration:
+
+``` JavaScript
+function getUser(name, age, sex) {
+  // run code.
+}
+```
+
+Function Expression:
+
+``` JavaScript
+const user = function getUser(name, age, sex)
+```
+
+Arguments Vs Parameters
+Quite often these are used interchangeably, however, technically **parameters give a name to the data** and **arguments give a value to the data**.
+
+### Hoisting
+
+### Scope
+
+When you have a set of curly braces {}, this is defining a new local scope. You have global scope, and within that, you have local scopes.
+A local scope, like within a function can access values in the global scope. However, it works like a one way door, as the outer global scope cannot access values within a local scope.
+
+Lets say you have a variable with the name user. `const user = 'Matthew'` defined within a function, and you also had a variable defined as user in the global scope. This won't cause any conflicts as the outer scope cannot see within the local scope and the local scope will always look for the user value within before looking into the outer scope.
+
+### Closures
+
+Simply put, normally referred to as functions within functions.
+ex.
+
+``` JavaScript
+function func(variable) {
+  const variable3 = 3
+  return function func2(variable2) {
+    console.log(variable)
+    console.log(variable2)
+    console.log(variable3)
+  }
+}
+
+
+cont a = func(1)
+a(2)
+```
+
+### New And This
