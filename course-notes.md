@@ -24,6 +24,7 @@
   -[For Loop](#for-loop)
   -[Type Coercion](#type-coercion)
 - [Day 09](#day-09)
+- [Day 10](#day-10)
 
 ## Day 01
 
@@ -1392,7 +1393,7 @@ Generally, when you are dealing with javascript, the best rule of thumb is to al
 
 ## Day 09
 
-### Function Declaration vs Funciton Expression
+### Function Declaration vs Function Expression
 
 Function Declaration:
 
@@ -1441,3 +1442,116 @@ a(2)
 ```
 
 ### New And This
+
+## Day 10
+
+### Selecting An Element
+
+`querySelector` method:
+The document object contains a method called `querySelector`. It can look like this:
+
+``` JavaScript
+const element = document.querySelector(selector)
+```
+The selector refers to the id, class, tag, or attribute of the element you want to select. These selectors are written the same way as you would write selectors in CSS:
+
+- To select an element with an id, you prepend it with `#`
+
+- To select an element with a class, you prepend it with `.`
+
+- To select an element with an attribute, you would write the attribute in square `[]` brackets
+
+Example:
+
+``` JavaScript
+document.querySelector('#password')
+```
+
+*querySelector returns only one element and that the element will be the first element it finds - it doesn't matter how many elements you selector matches.*
+
+If you want to select multiple elements, you'll need to use another method called `querySelectorAll`.
+
+You can write complex selectors that combine id, classes, tags and even attributes, but don't do it - one selector is usually good enough to handle your selection needs.
+
+``` javascript
+// Dont't do this
+document.querySelector('header#logo')
+```
+
+All elements have the `querySelector` method too.
+This lets you search for an element within another element - so JavaScript doesn't have to comb through the entire DOM.
+
+When you use `element.querySelector`, you'll write that much easier to read and understand, less prone to bugs, and faster compared to using `document.querySelector` all the time.
+
+### Changing Classes
+
+Yes, you can change CSS with JavaScript, but you don't want to do it often.
+For now, you'll want to change CSS with classes because that's the best way to do it - let CSS handle CSS stuff.
+
+#### Adding a class
+
+To add a class, you use the `add` method. This method can be found within the classList property that exists for all elements.
+
+``` JavaScript
+element.classList.add('className')
+```
+
+#### Adding multiple classes at once
+
+You can add multiple classes to the same element if you pass in extrea arguments, like this:
+
+``` JavaScript
+element.classList.add('firstClass,' 'secondClass', 'thirdClass')
+```
+
+*Note: There's no need to add multiple classes in practise. One class is good enough, provided you're smart with your classes.*
+
+#### Removing a class
+
+To remove a class, you use the `remove` method, which is present in `classList`.
+
+``` JavaScript
+element.classList.remove('className')
+```
+
+Note: You don't need to add `.` before your classes when you use `element.classList`. This is a common mistake if you mix up the syntax for `querySelector` and `element.classList`.
+
+#### Checking if a class exists
+
+If you want to check if a class exists, you can use the `contains` method:
+
+``` JavaScript
+element.classList.contains('className')
+```
+
+NOTE: This method is often used together with the `if` statement to check whether the class exists:
+
+``` JavaScript
+if (div.classList.contains('header')) {
+  // code block
+}
+```
+
+#### Toggling a class
+
+Toggling classes means this:
+
+- Remove `className` if `className` exists
+
+- Add `className` if `className` doesn't exist
+
+Note: You'll toggle class on/off frequently when you build components - so much that javascript provides you with a `toggle` method.
+
+``` JavaScript
+element.classList.toggle('className')
+```
+
+---
+
+### The BOM and the DOM
+
+BOM stands for Browser Object Model while DOM stands for Document Object Model.
+
+#### BOM
+
+The BOM refers to the set of JavaScript objects browsers provide you with. It gives you the `window` object in JavaScript. If you open up your inspector and write `console.log(window)`, you'll see the list of every JavaScript method you can use.
