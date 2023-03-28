@@ -25,6 +25,8 @@
   -[Type Coercion](#type-coercion)
 - [Day 09](#day-09)
 - [Day 10](#day-10)
+- [Day 11](#day-11)
+- [Day 12](#day-12)
 
 ## Day 01
 
@@ -1555,3 +1557,244 @@ BOM stands for Browser Object Model while DOM stands for Document Object Model.
 #### BOM
 
 The BOM refers to the set of JavaScript objects browsers provide you with. It gives you the `window` object in JavaScript. If you open up your inspector and write `console.log(window)`, you'll see the list of every JavaScript method you can use.
+
+
+## Day 11
+
+### The Date Object
+
+```JavaScript
+const date = new Date()
+```
+
+In JavaScript, we can tell the date and time with the `Date` object.
+
+If you console.log date, you'll get a log that tells your four things:
+
+- The day of the week
+
+- The date today
+
+- The time now
+
+- The timezone
+
+#### Built-in Formats
+
+Date comes with seven methods that lets you convert a `Date` object into a string. Here's what each of them do:
+
+1. `toString` returns: Wed Jan 23 2019 17:23:42 GMT+0800 (Singapore Standard Time)
+
+2. `toDateString` returns: Wed Jan 23 2019
+
+3. `toLocaleString` returns: 23/01/2019, 17:23:42
+
+4. `toLocaleDateString` returns: 23/01/2019
+
+5. `toGMTString` returns: Wed, 23 Jan 2019 09:23:42 GMT
+
+6. `toUTCString` returns: Wed, 23 Jan 2019 09:23:42 GMT
+
+7. `toISOString` returns: 2019-01-23T09:23:42.079Z
+
+*Note: Each method gives a specific date/time string. Unfortunately, none of them gives us the format (23 Jan, 2019) we wanted. We need tot create the format ourselves with some Date methods.*
+
+#### Date Methods
+
+Here's a list of methods that helps you format a date.
+
+1. `getFullYear`: Gets 4-digit year according to local time.
+
+2. `getMonth`: Gets month of the year (0-11) according to local time.
+
+3. `getDate`: Gets day of the month (1-31) according to local time.
+
+4. `getDay`: Gets day of the week (0-6) according to local time. Day of the week begins with Sunday (0) and ends with Saturday (6).
+
+#### Creating a custom format
+
+First, we need to create a date object.
+
+`const today = new Date()`
+// Tue Mar 28 2023 09:56:16 GMT-0400 (Eastern Daylight Saving Time)
+
+Then, to get the day of the month we can do the following:
+
+`const day = today.getDate()`
+// 28
+
+`const year = today.getFullYear()` // 2023
+
+*Note: Getting the likes of the name of the month is harder and requires more code.*
+
+We only have access to `getMonth`, and `getMonth` returns a number from 0 to 11. This means we must convert the month number (0-11) into a month string (January-December) ourselves.
+
+First, we need to create an object that tells us 0 is January, 1 is February etc..
+
+``` JavaScript
+const monthsInAYear = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+```
+
+Let's get the name of the current month:
+
+``` JavaScript
+const monthIndex = today.getMonth()
+const monthName = monthsInAYear[monthIndex]
+console.log(monthName) // January
+```
+
+#### Getting day of the week
+
+What if we wanted to get `Tuesaday, 28 March` instead?
+
+The `Date` object has a `getDay` method that tells us the day of the week. It returns a number from 0 to 6. The values goes like this:
+
+- 0: Sunday
+
+- 1: Monday
+
+- 2: Tuesday
+
+- 3: Wednesday
+
+- 4: Thursday
+
+- 5: Friday
+
+- 6: Saturday
+
+If we want to get `Tuesday` from `Date` we need to create a `daysInAWeek` array that converts number into strings.
+
+``` JavaScript
+const dayString = daysInAWeek[today.getDay()]
+console.log(dayString) // Tuesday
+```
+
+
+### For in... loop
+
+The JavaScript `for in` statement loops through the properties of an Object:
+
+Syntax:
+
+``` JavaScript
+for (key in object) {
+  // code block to be executed
+}
+```
+
+For In Over Arrays
+The JavaScript `for in` statement can also loop over the properties of an Array:
+
+Syntax:
+
+``` JavaScript
+for (variable in array) {
+  // code
+}
+```
+
+Example
+
+``` JavaScript
+const person = {
+  Name: 'Matthew',
+  Age: 34,
+  Gender: 'Male'
+}
+
+for (let x in person) {
+  console.log(person[x])
+}
+// Matthew
+// 34
+// Male
+```
+
+Example Explained
+
+- The for in loop iterates over a **person** object
+
+- Each iteration returns a **key** (x)
+- The key is used to access the **value** of the key
+- The value of the key is **person[x]**
+
+*Note: The `for in` statement can also loop over the properties of and array.*
+
+*Important! Do not use `for in`  over an array if the index order is important. It is better to use a `for of`, `.forEach()` or `for` loop when the order is important.*
+
+#### Map() Array methods
+
+The difference between .forEach() vs. map()
+
+Example
+If we use a .forEach() method to iterate through an array and log each value to the console:
+
+``` JavaScript
+const studentName = ['Matthew', 'Oliver', 'Benny', 'Ginette', 'Amy', 'Donald']
+
+studentName.forEach(student => console.log(student.toUpperCase()))
+
+// MATTHEW
+// OLIVER
+// BENNY
+// GINETTE
+// AMY
+// DONALD
+```
+
+We could do the exact same thing with a map() method.
+
+``` JavaScript
+const studentName = ['Matthew', 'Oliver', 'Benny', 'Ginette', 'Amy', 'Donald']
+
+studentName.map(student => console.log(student.toUpperCase()))
+
+// MATTHEW
+// OLIVER
+// BENNY
+// GINETTE
+// AMY
+// DONALD
+```
+
+As you can see there is no difference. However, say we want to assign the values to an new array.
+
+``` JavaScript
+const newArray = studentName.forEach(student => student)
+console.log(newArray)
+
+// undefined
+```
+
+As you can see the .forEach method returns `undefined`.
+
+``` JavaScript
+const newArray = studentName.map(student => student)
+console.log(newArray)
+
+// [ 'Matthew', 'Oliver', 'Benny', 'Ginette', 'Amy', 'Donald' ]
+```
+
+With the `map()` method we are returned an array with the student names.
+This is because map() returns a new array without altering our intial array. While `.forEach()` does not return a new array.
+
+*This is the key difference between the two methods.*
+
+It is important to note, that map() will return a new array and will not the original array. We can check this if we `console.log(studentNames)`
+
+
+
