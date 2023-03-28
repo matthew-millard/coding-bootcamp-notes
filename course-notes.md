@@ -1796,5 +1796,147 @@ This is because map() returns a new array without altering our intial array. Whi
 
 It is important to note, that map() will return a new array and will not the original array. We can check this if we `console.log(studentNames)`
 
+## Day 12
 
+## Day 13
+
+### Third Party API
+
+jQuery API
+
+jQuery is a fast, small, and feature-rich JavaScript libaray. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.
+
+To add jQuery API, we have to include the CDN in our HTML document.
+
+``` HTML
+ <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+```
+
+How to create an element:
+`$('<h1>')`
+
+How to add text content:
+`element.text('Hi there')`
+
+How to add a attribute to an element:
+`element.attr('class', 'header')`
+
+How to add a class to an element:
+`element.addClass('container')`
+
+How to add css styling to an element:
+`element.css('background-color', 'red')`
+
+How to append a child element onto an element:
+`element.append('<h2>')`
+
+How to add an event listener to an element:
+`element.click(function () {
+  // do stuff...
+})`
+
+How to select an HTML element:
+`var button = $('.button')`
+
+How to get the value of an input:
+`const input = $('#usernameInput')
+const userName = input.val()`
+
+*Note: You can log to the console `console.log($())` to see a list of all the methods available to use.*
+
+All the methods available in jQuery are listed in the documention on the website.
+[jQuery Documention](https://api.jquery.com/)
+
+#### Event Delegation
+
+Let's say you have a list of items. You want to listen to a `click` event on each item. One way is to attach an event listener to every item.
+
+Example
+
+``` JavaScript
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+  <li>Item 4</li>
+  <li>Item 5</li>
+</ul>
+```
+
+Most likely you would think to use a forEach() method as below:
+
+``` JavaScript
+const items = Array.from(document.querySelector('li'))
+
+items.forEach(item => {
+  item.addEventListener('click', () {
+    // do stuff here...
+  })
+})
+```
+
+But what if you had one thousand items? If you do the above, you'll create one thousand event listeners. That's not the best way.
+
+A better way is to use the event delegation pattern.
+
+#### Event Delegation Pattern
+
+The event delegation pattern makes use of event propagation. It works like this:
+
+1. You attach one event listener to an ancestor element
+
+2. Ancestor element listens toa all events in descendant elements
+
+*Note: the event delegation pattern only works for events that bubble.*
+
+``` HTML
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+  <li>Item 4</li>
+  <li>Item 5</li>
+</ul>
+```
+
+``` JavaScript
+const list = querySelector('ul')
+
+list.addEventListener('click', e => {
+  // do stuff here...
+})
+```
+
+Determining the event target
+
+The element that fires the event is called the *event target*. It can be found with the `target` property.
+
+``` JavaScript
+list.addEventListener('click', e => console.log(e.target))
+```
+
+Avoid misfires
+The event delegation pattern is sensitive to all events fired from the listening element onwards. In this case, you can also fire the callback when you click on the list itself.
+
+To prevent such misfires from happening, we need to check if the target element matches the element we're looking for. We can do so with the `matches` method.
+
+`matches` checks if the element matches the selector we provided. You should be familiar with it's syntax.
+
+``` JavaScript
+element.matches(selector)
+```
+
+`matches` will either return `true` or `false`. It will be true if the element matches the `selector`.
+
+In this case, we only want to do something if a user clicks on a list item. We can check whether the event target is a list item with `matches`.
+
+``` JavaScript
+list.addEventListener('click', e => {
+  if (e.target.matches('li')) {
+    // do stuff here...
+  }
+})
+```
 
