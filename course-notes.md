@@ -1917,7 +1917,9 @@ console.log(numGreaterThanTen) // [ 12, 18, 11, 50 ]
 
 ### reduce() method
 
-`reduce` is an array method that helps you convert an array into a single value. It looks like this: 
+The `.reduce()` method combines each element of an array, using a specified reducer function, and returns a single value.
+
+Another definition: `reduce` is an array method that helps you convert an array into a single value. It looks like this: 
 
 ``` javascript
 const callback = (accumulator, currentValue, index) => {
@@ -1935,12 +1937,86 @@ const result = array.reduce(callback, initialValue)
 
 Let's go through some examples.
 
+#### Summing Numbers Example
 
+Let's say you have a list of numbers. You want to find the total sum of these numbers.
 
+`const numbers = [1, 2, 3, 4, 5, 6, 7,]`
 
+Here's the code to sum the numbers.
 
+``` JavaScript
+const total = numbers.reduce((acc, num) => {return acc + num}, 0)
+```
 
+Let's go through what happens, step by step.
 
+First, you pass an `initialValue` to `reduce`. This initialValue should be 0 because:
+
+1. We want `accumulator` to be a number.
+
+2. We don't want the `initialValue` to affect the sum.
+
+**NOTE: `accumulator` will be `initialValue` in the first iteration. `currentValue` will be the first array item.**
+
+You need to return a value in the callback. This value will be used as the next `accumulator`. Since we want to sum numbers, we return the sum of `accumulator` and `currentValue`.
+
+`accumulator` takes on the returned value in the second iteration.
+`currentValue` will be the second array item.
+
+We return the sum of the two values we have, `accumulator` and `currentValue`. This process goes on until reduce loops through the entire array. **The final value will be returned to the function call.**
+
+Below is an example using the reduce method to help get the average age.
+
+``` JavaScript
+const ages = [1, 12, 4, 18, 9, 7, 11, 3, 50, 5, 6]
+
+// I want to find the average age
+const averageAge = getAverageAge(ages)
+
+function getAverageAge(arr) {
+	const sumOfAges = arr.reduce((acc, age) => {
+		return acc + age
+	}, 0)
+	const averageAge = sumOfAges / arr.length
+	return Math.round(averageAge)
+}
+console.log(averageAge) // 11
+```
+
+#### Reducing an array into an object
+
+We'll create the `reduce` method together for this example.
+Let's say we have an array of fruits. We want to know the number of each type of fruit.
+
+``` JavaScript
+const fruits = ['apple', 'apple', 'banana', 'banana', 'orange', 'pear', 'apple']
+
+const tally = fruits.reduce((acc, fruit) => {
+	if (acc[fruit]) {
+		acc[fruit] = acc[fruit] + 1
+	} else {
+		acc[fruit] = 1
+	}
+	return acc
+}, {})
+
+console.log(tally)
+// { apple: 3, banana: 2, orange: 1, pear: 1 }
+```
+
+Let's clean up the reduce function next. We can do so with ternary operators.
+
+``` JavaScript
+const tally = fruits.reduce((acc, fruit) => {
+	const fruits = acc[fruit]
+	fruits ? (acc[fruit] = fruits + 1) : (acc[fruit] = 1)
+	return acc
+}, {})
+// { apple: 3, banana: 2, orange: 1, pear: 1 }
+```
+
+#### Flattening an array
 
 
 
