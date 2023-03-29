@@ -1798,6 +1798,158 @@ It is important to note, that map() will return a new array and will not the ori
 
 ## Day 12
 
+### Sort() Method
+
+The `.sort()` method returns an aray with its items sorted in place.
+
+``` JavaScript
+// No parameters
+array.sort()
+
+// With optional function
+array.sort((firstElement, secondElement) => {
+  // function  body
+})
+```
+
+If the `.sort()` method is used  with no arguments, all items with undefined values are shifted to the end of the array while the remaining items are converted to strings and sorted by **Unicode code point value**.
+
+An optional function is used to define how items are sorted. **This is done by iterating over the array and comparing every `firstElement` and `secondElement` in the function body.**
+
+Example
+In the following example, the `.sort()` method is applied to two arrays, `letters` and `numbers`.
+
+``` JavaScript
+const letters = ['d', 'b', 'e', 'a', 'c']
+const numbers = [5 , 2, 123, 5.01, 43.5]
+```
+
+This results in the following output:
+
+``` JavaScript
+letters: ['a', 'b', 'c', 'd', 'e']
+numbers: [123, 2, 43.5, 5, 5.01]
+```
+
+The letters were sorted in alphabetical order. The items in numbers were sorted based on the leading number in the item's value (e.g Unicode value). Sorting numerical values more strictly requires a custom comparison function.
+
+Example using the optional function:
+The  following example showcases how the optional `callback` argument can be used to sort a `numbers` numbers array in ascending and descending order:
+
+``` JavaScript
+const ascending = numbers.sort((a,b) => a - b)
+
+console.log(ascending) // [2, 5, 5.01, 43.5, 123]
+```
+
+``` JavaScript
+const descending = numbers.sort((a,b) => b - a)
+
+console.log(descending) // [123, 43.5, 5.01, 5, 2]
+```
+
+### findIndex() Method
+
+`findIndex()` lets you *find the index of an item in an array*. It **loops through every item in the array and returns the first truthy expression**.
+
+The syntax looks like this:
+
+``` javascript
+const index = array.findIndex((currentItem, index) => {
+  // return a truthy expression here...
+})
+```
+
+Its much easier to explain Array.findIndex with an example, so let's do that. Let's say you have an array of objects. Each object is a person, and each person has a name.
+
+``` javascript
+const people = [
+	{
+		name: 'Matthew',
+	},
+	{
+		name: 'Amy',
+	},
+	{
+		name: 'Donald',
+	},
+	{
+		name: 'Ginette',
+	},
+]
+  ```
+
+You want to know the position of the person named `Donald` in the `people` array. To do so, you can use `person.findIndex()` and check if the `name` property in each object matches `Donald`.
+
+const indexOfDonald = people.findIndex(person => person.name === 'Donald')
+
+console.log(indexOfDonald) // 2
+
+### find() Method
+
+`find` works the same way as `findIndex`, but `find` returns the item instead of the index.
+
+```javascript
+const donald = people.find(person => person.name === 'Donald')
+console.log(donald)
+// {name: 'Donald'}
+```
+
+### filter() Method
+
+`array.filter` **returns a new array** that contains a subset of the original array. **Items will be added to the new array if you return a truthy expression**.
+
+``` javascript
+const filteredItems = array.filter((currentItem, index) => {
+  // return a truthy expression to include in filteredItems
+})
+```
+
+Once again, its easier to explain `filter` with an example, so let's do that.
+
+Let's say you have a list of numbers. You want to make another list of numbers that are bigger than ten. You can do this easily with `filter`.
+
+``` Javascript
+const numbers = [1, 12, 4, 18, 9 , 7, 11, 3 , 50, 5, 6]
+const numsGreaterThanTen = numbers.filter(num => num > 10)
+console.log(numGreaterThanTen) // [ 12, 18, 11, 50 ]
+```
+
+### reduce() method
+
+`reduce` is an array method that helps you convert an array into a single value. It looks like this: 
+
+``` javascript
+const callback = (accumulator, currentValue, index) => {
+  // return something here
+}
+
+const result = array.reduce(callback, initialValue)
+```
+
+**initialValue** is the value you want to start with.
+
+**accumulator** is the value returned from the previous iteration. It will be `initialValue` for the first iteration.
+
+**currentValue** is array item in the current iteration.
+
+Let's go through some examples.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Day 13
 
 ### Third Party API
