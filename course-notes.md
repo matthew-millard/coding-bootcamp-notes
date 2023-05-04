@@ -27,6 +27,12 @@
 - [Day 10](#day-10)
 - [Day 11](#day-11)
 - [Day 12](#day-12)
+- [Day 13](#day-13)
+- [Day 14](#day-14)
+- [Day 15](#day-15)
+- [Day 16](#day-16)
+- [Day 25](#day-25)
+- [Day 29](#day-29)
 
 ## Day 01
 
@@ -2167,4 +2173,1108 @@ list.addEventListener('click', e => {
   }
 })
 ```
+
+## Day 16
+
+### Fetch API
+
+The fetch API can even request data from third-party API's, like the OpenWeather API.
+
+`fetch()` A modern way for the client (browser) side to exchange data with a server.
+
+When the client makes a request to the API server, the request enters a pending state. Then when the server sends back a response, and everything has worked as expected, the response is going to be resolved and the data the client gets is then usable.
+
+Sometimes a response comes back with errors. In this case, the fetch request is then rejected.
+
+``` JavaScript
+fetch(requestUrl)
+.then(function (response) {
+  return response.json()
+})
+```
+
+Now, when this URL gets sent through, the fetch requests this is where the pending state happens and it is either going to be resovled or rejected.
+
+If it is resolved, then I am going to do something with that response.
+
+The response is just an HTTP response. It is not JSON. You need to extract the JSON body from this response.
+
+So by using this method, I'm able to extract the JSON from this response.
+`return response.json()`
+
+Now that you hvae converted the HTTP response to JSON, we ***then*** need to do something with this ***data***.
+
+``` JavaScript
+const requestUrl = 'http://ergast.com/api/f1/2008/5/results'
+// make sure to wrap the url in quotes.
+
+fetch(requestUrl)
+.then(function (response) {
+  return response.json()
+})
+.then(funtion (data) {
+  console.log(data)
+  // do something now with the data.
+})
+```
+
+Before we move on, lets look at a few way this fetch() function may be written. The below example uses arrow functions to reduce the amount of code.
+
+``` JavaScript
+const requestUrl = 'http://ergast.com/api/f1/2008/5/results'
+
+fetch(requestUrl)
+.then(response => {
+  return response.json()
+})
+.then(data => {
+  console.log(data)
+})
+```
+
+We can even reduce this even further.
+
+``` JavaScript
+const requestUrl = 'http://ergast.com/api/f1/2008/5/results'
+
+fetch(requestUrl)
+.then(response => response.json())
+.then(data => console.log(data))
+```
+
+The above technique uses `implicit returns`
+
+Either way works exactly the same way. Choose which way works for you. Try find a way that has a good balance between readability and having the least amounts of code.
+
+---
+
+### Status Codes
+
+The three most commonly see status codes are:
+
+`200` means success
+
+`404` means resources missing or not found.
+
+`500` means that there is an internal server error.
+
+If we do not receive a 200 status code, any user attemping to visit the web page can be redirected to a 404 page by adding the following code.
+
+``` JavaScript
+fetch(requestUrl)
+.then(response => {
+  if (response.status !== 200) {
+    document.location.replace('./404.html')
+  } else {
+    return response.json()
+  }
+})
+.then(data => {
+  // do something with data here
+})
+```
+
+***If the response status does not equal 200 then redirect user to the 404 page.***
+
+---
+
+### AJAX
+
+AJAX is an important front-end web technology that lets JavaScript communicate with a web server. It lets you load new content without leaving the current page, creating a better, faster experience for your website's visitors.
+**AJAX stands for Asynchronous JavaScript And XML**
+
+XHR: short for XML HttpRequests.
+
+Technically, AJAX's real name is called `XMLHttpRequest Object`.
+
+Put simply, AJAX is the process of using JavaScript to send a request to a web server, and receive a response back, and then do something with that response. What you send to the web server with AJAX can be a simple request for a web page, a text file, a search sent to a database, or a complete form full of information.
+
+You can send out multiple AJAX requests, and even though you send each request, one after another, you won't know which request will come back first. The speed of the server, the complexity of the request, and any internet traffic, all play a part in when a request returns information to the browser (client).
+
+`The X in AJAX stands for XML or Extensible Markup Language.` XML also appears in the offficial name for this technology, XMLHttpRequest Object.
+
+Originally, XML was seen as the format server responses should be sent in. It is not the most common and modern way of doing it.
+
+#### How AJAX Works
+
+1. Create a XMLHTTP Request object.
+
+2. Create a callback function. This is where you process the returned data and update the HTML.
+
+3. Open a request.
+
+4. Send the request
+
+##### Step 1
+
+Create an XMLHttpRequest object
+
+`var xher = new XMLHttpRequest()`
+
+*This tells the web browser to get ready to work with AJAX and it is required anytime you would like to use AJAX.*
+
+Note: you can call the variable anything you like. It is arbitrary.
+
+In fact, for each AJAX request you should create a new XHR object.
+For example, if you wanted to use AJAX twice on a page to request data, for a form submission, a sidebar and another submission form. You will need three variables each with the own XHR object.
+
+##### Step 2
+
+Create a callback function
+This is the most complicated part of the AJAX process.
+That is because the callback is the programming the browser to run when the server gets back with its response.
+The callback function is the heart of your AJAX program, all the fun stuff you can think to do with the web server's response. Think of the callback as a note you leave the browser. Give me a call when you're ready
+When the web browser sends off its AJAX request, it continues doing other things. This is the asynchronous part of AJAX. When the browser sends off an asynchronous request it doesnt just wait till it gets a response. If it did the browser would just freeze.
+But, when the browser finally gets that response from the web server, it looks for that note, your callback, and gives it a call, and executing all of that programming you set up inside that callback.
+
+There is another strange thing about AJAX. If you make multiple AJAX requests, you'll never know which request the server will respond back to first. In other words, you can never tell in which order your AJAX callbacks will run.
+
+AJAX comes with its own set of events. We can add programming to respond to those events. The most important is the `.onreadystatechange` event.
+This event is triggered whenever there's a change in a AJAX request.
+Like opening a new request, sending it, or receiving a response. We create our callback to respond to that request.
+
+``` JavaScript
+xhr.onreadystatechange = function () {
+
+}
+```
+
+This programming runs each time there is a change in state of the AJAX request. Each step in the AJAX process, like opening a new request or sending out that request triggers a change of state. In this callback function we are only interested in the final change of state. That is when the server sends back its response. We want to get that response and update our web page. The XMLHttpRequest object keeps track of the state using a special property named `.readystate`.
+That property contains a number including the current state of the request and that propery holds the number `4`. When the `.readystate` property holds the number `4`, the request is done and the server has sent back a response.
+Let's add a conditional statement to test for that state.
+
+``` JavaScript
+xhr.onreadystatechage = function() {
+  if (xhr.readystate === 4) {
+    document.querySelector('#ajax').innerHTML = xhr.responseText
+  }
+}
+```
+
+So here, we're checking if the ready state is equal to 4. That means we have got the response back. One we have the response back, we can do things like place the HTML data from the server into our document. Say we have a `<div id="ajax">`
+we can select that using normal DOM manipulation methods and replace the innerHTML. Every XMLHttpRequest object has a property called `.responseText`.
+
+The `.responseText` is the information that the web server sends back. Above we are taking the .`responseText` and storing it inside of the `div` with the `id="ajax"`.
+In this case we have a simple callback. Remeber the programming doesn't run until the response comes back from the server. In fact, we have two more steps to complete the AJAX request.
+
+##### Step 3
+
+Open a request
+
+An XHR object has a method or function called open.
+
+``` JavaScript
+var xhr = new XMLHttpRequest()
+
+xhr.onreadystatechange = function () {
+  if (xhr.readystate === 4) {
+    document.querySelector('#ajax').innerHTML = responseText
+  }
+}
+xhr.open('GET', 'sidebar.html')
+
+```
+
+The `.open()` function prepares the browser for sending the request.
+You give the function TWO pieces of information. Also known as taking two parameters. The first is the HTTP method that you're going to use. The most common methods are GET and POST. But there are others, such as PUT and DELETE. You will use GET if you want to send a request for data. And POST if you are sending the data. Like information from a form, for the server to save in the database. The URL is where the request is going.
+This could point to a file or a server-side program on your web server. With this example, it is just pointing to a file in the workspace. We'll load that file into the page. The `open()` just makes the browser ready to make the request, but it doesn't send that request. That is the last step of the process.
+
+##### Step 4
+
+Sending the request
+
+``` JavaScript
+var xhr = new XMLHttpRequest()
+xhr.onreadystatechange = function () {
+  if (xhr.readystate === 4) {
+    document.querySelector('#ajax').innerHTML = responseText
+  }
+}
+xhr.open('GET', 'sidebar.html')
+xhr.send()
+```
+
+The previous three steps gives the browser all the information it needs. So we can finally send off the request to the web server.
+Sending off the request takes just a simple bit of code.
+
+`xhr.send()`
+
+In our case since we're requesting a chunk of HTML, we don't provide any additional information in the send() function. But when you need to submit information to the server like the user's input from a web form,
+you can pass the send() method that data.
+
+Key Points
+There are two common methods for sending HTTP requests:
+
+- GET. Used for most requests. Browser uses the GET method whenever it requests a new web page, CSS file, image, and so on. Use GET when you want to "get" something from the server.
+
+- POST. Used frequently with web forms to send data to store in a database. Use POST when sending data that will store, delete or update information from a database.
+
+## Day 25
+
+### Node.js
+
+Node.js is a JavaScript runtime environment built on Google's Chrome V8 JavaScript engine. The runtime environment is designed to run outside of the browser, allowing developers to use JavaScript on the backend of their applications.
+
+Ryan Dahl developed it in 2009, and its lastest iteration, version 18.16.0, was released in 2023. Developers use Node.js to create server-side web applications, and it is perfect for data-intensive applications since it uses an asynchronous, event-driven model.
+
+#### Why do we use Node.js
+
+There are many reasons for which Node.js is preferred for the server side of applications:
+
+- NodeJs is built on Google's Chrome V8 engine, and for this reason its execution time is very fast and it runs very quickly.
+
+- There are more than 50,000 bundles available in the Node Package Manager NPM and for that reason developers can import any of the packages any time according to their needed functionality for which a lot of time is saved.
+
+- As NodeJs don not need to wait for an API to return data, so for building real time and data intensive web applications, it is very useful. It is totally asynchronous in nature that means it is totally non-blocking.
+
+- The loading time for an audio or video is reduced by NOdeJs because there is better synchronization of the code between the client and server for having same code base.
+
+- As NodeJs is open-source and it is nothing but a JavaScript framework, so for the developers who are already used to JavaScript, for them starting developing their projects with NodeJs is very easy.
+
+### Arrow Functions
+
+Arrow functions are pretty cool - they help you make code shorter and give less room for errors to hide. Because of this, they've become really popularr with experienced developers.
+
+The basic syntax:
+An arrow function is denoted by the fat arrow `=>`.
+
+Here's what it looks like:
+
+``` JavaScript
+const arrowFunction = (arg1, arg2) => {
+  // do stuff here...
+}
+```
+
+If the function only requires one argument, it can be written without any paranthesises used around the argument. This is optional.
+
+``` JavaScript
+const arrowFunction = arg1 => {
+  // do stuff here...
+}
+```
+
+If there is only one line of code to be executed within the function, the function can be written all on one line like below examples with an **implicit return**.
+
+``` JavaScript
+const arrowFunction = arg1 => console.log('Hello, World!')
+const arrowFunction = (arg1) => console.log('Hello, World!')
+const arrowFunction = (arg1, arg2, arg3) => console.log('Hello, World!')
+```
+
+#### What is an explicit return
+
+An explicit return is when you explicitly write return in the function.
+
+``` JavaScript
+const arrowFunction = arg => {
+  return sum = arg * 2
+}
+
+console.log(arrowFunction(10))
+// 20
+```
+
+Arrow functions are simply just anonymous functions. They become simple to understand once you place them side by side with a function expression.
+
+``` JavaScript
+// Arrow Function
+const arrowFunction = (arg1, arg2) => {
+  return sum = arg1 + arg2
+}
+
+// Function Expression
+const normalFunction = function (arg1, arg2) {
+  return sum = arg1 + arg2
+}
+```
+
+There are two basic differences when converting a function expression to an arrow function.
+
+- You remove the `function` keyword from a function expression
+
+- You add a `=>` after `()` and before `{}`
+
+#### Advanced Arrow Function Syntax
+
+If the arrow function has zero parameters, you can replace the parenthesis with an underscore `_`.
+
+``` JavaScript
+const arrowFunction = _ => console.log('Hello, World!')
+```
+
+### `this` Keyword 5 Binding Rules
+
+In JavaScript, the `this` keyword allows us to:
+
+- Reuse functions in different execution context. It means, a function once defined can be invoked for different objects using `this` keyword.
+
+- Identifying the object in the current execution context when we invoke a method.
+
+#### Rule #1 How JavaScript Implicit Binding Works
+
+Implicit binding covers most of the use-cases for dealing with the `this` keyword.
+
+When we invoke a method of an object, we use the dot(.) notation to access it. In implicit binding, you need to check the object adjacent to the method at the invocation time. This determines what `this` is binding to.
+
+Here is an example:
+
+``` JavaScript
+  const personDetails = {
+    name: 'Matthew',
+    address: '21535 Seven Hills Road, Vankleek Hill',
+    message: function () {
+      console.log(`${this.name} lives at ${this.address}`),
+    }
+  }
+
+  personDetails.message()
+  // Matthew lives at 21535 Seven Hills Road ....
+```
+
+  Here `this` is bound to the personDetails object. We know this because we invoke the method message() on the personDetails object. So `this.name` is going to log `Matthew` and `this.address` is going to log `21535 Seven Hills Road...`
+
+Another Example
+
+``` JavaScript
+function greeting(obj) {
+	obj.message = function () {
+		console.log(`${this.name}! ${this.greeting}`)
+	}
+}
+
+const matthew = {
+	name: 'Matthew',
+	greeting: 'How are you?',
+}
+
+const amy = {
+	name: 'Amy',
+	greeting: 'Sup! How are things?',
+}
+
+greeting(amy)
+greeting(matthew)
+matthew.message()
+amy.message()
+
+// Matthew! How are you?
+// Amy! Sup! How are things?
+```
+
+## Day 29
+
+### Object Oriented Programming
+
+Object oriented programming is a style of writing JavaScript that uses Objects.
+We use Object Oriented Programming when we want three things:
+
+1. We want to create `instances` of objects
+2. We want to extend objects via `Inheritance`
+3. We want to hide properties via `Encapsulation`
+
+#### Creating Instances of Objects
+
+Below is a `blueprint` that spits out firtsName, lastName, age, and sex. We can send data to the blueprint  to create as many objects as we need. Objects created from blueprints are called `instances`.
+
+``` JavaScript
+function Person (firstname, lastName, age, sex) {
+  this.firstName = firstName
+  this.lastName = lastName
+  this.age = age
+  this.sex = sex
+}
+```
+
+#### Creating a constructor
+
+A constructor is a function. We begin constructors with a capital letter so we know it's different from normal functions.
+
+In this case, let's call th constructor `Person`.
+
+``` JavaScript
+function Person() {
+  // ...
+}
+```
+
+We can use the `this` keyword inside a constructor to create properties. The `this` keyword refers to the instance that's going to be created later.
+
+``` JavaScript
+function House(bedrooms, bathrooms, garden, garage, ensuite) {
+  this.bedrooms = bedrooms
+  this.bathrooms = bathrooms
+  this.garden = garden
+  this.garage = garage
+  this.ensuite = ensuite
+}
+
+  const myHouse = new House(5, 2, true, true, true)
+  console.log(myHouse)
+
+  // House {
+//bedrooms: 5,
+//bathrooms: 2,
+//garden: true,
+//garage: true,
+//ensuite: true
+//}
+```
+
+#### Creating an instance
+
+You create an instance by doing two things:
+
+1. Use the `new` keyword
+2. Call the constructor function
+
+`const myHouse = new House(5, 2, true, true)`
+
+You can create as many instances as you want. Each instance will retain their individuality.
+
+#### Instances in the wild
+
+I have already been creating instances without knowing it.
+
+For example, you create an array with `[]`, you actually create a new instance of `Array`. JavaScript simply lets you use `[]` as a shorthand to `new Array()`
+
+``` JavaScript
+const array = ['Matthew']
+const array2 = new Array('Matthew')
+```
+
+The same applies to Objects. You've been creating Objects with `{}`. But JavaScript uses `new Object()` behind the scenes.
+
+``` JavaScript
+const object = {bedrooms: 4, bathrooms: 2, garage: false, garden: true} 
+const object2 = new Object()
+object2.bedrooms = 4
+object2.bathrooms = 4
+object2.garage = 4
+object2.garden = 4
+```
+
+#### Creating a method in the constructor
+
+``` JavaScript
+function House(bedrooms, bathrooms, garden, garage, ensuite) {
+	this.bedrooms = bedrooms
+	this.bathrooms = bathrooms
+	this.garden = garden
+	this.garage = garage
+	this.ensuite = ensuite
+	this.printDetails = function () {
+		let garden = ''
+		let garage = ''
+		let ensuite = ''
+		this.garden ? (garden = 'does') : (garden = "doesn't")
+		this.garage ? (garage = 'a') : (garden = 'no')
+		this.ensuite ? (ensuite = 'a') : (ensuite = 'no')
+		return `This house has ${this.bedrooms} bedrooms, ${this.bathrooms} bathrooms. It ${garden} have a garden. There is ${garage} garage and there is ${ensuite} ensuite.`
+	}
+}
+const house1 = new House(3, 2, true, false, true)
+const details = house1.printDetails()
+// This house has 3 bedrooms, 2 bathrooms. It no have a garden. There is  garage and there is a ensuite.
+```
+
+### Four Flavours of Object Oriented Programming
+
+There are four ways to create a blueprint fro Object Oriented Programming:
+
+1. Constructor Syntax
+2. Classes Syntax
+3. OLOO
+4. Factory Functions
+
+#### Class Syntax
+
+We can create a `class` with the `class` keyword. Like constructors, we begin th class with a capital letter.
+
+It looks like this:
+
+``` JavaScript
+class House {
+  constructor() {
+    // code to initialize instances
+  }
+}
+```
+
+Everything that goes into a `Constructor` function would go into a class's  `constructor` method.
+
+If you want to create a `Human` class with a `firstName` and `lastName` property, you'll write it like this:
+
+``` JavaScript
+class Human {
+  constructor(firstName, lastName) {
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+
+
+// Create a new instance
+const person1 = new Human('Matthew', 'Millard)
+console.log(person1)
+// { firstName: 'Matthew', lastName: 'Millard' }
+```
+
+### Constructors vs Classes
+
+**Constructor and class are the same thing.** Behind the scenes, JavaScript converts Classes into Contructors. That's why people say classes are **syntactic sugars**.
+
+Even though `Constructors` look easier to use now (since there's less code), `Classes` become easier to use when `Inheritance` comes into play.
+
+### OLOO Syntax
+
+OLOO is an acronym for **Ojects Linking to Other Objects**.
+
+The OLOO Syntaxt uses a JavaScript object as the blueprint. The mose basic form of an OLLO syntax is an empty object:
+
+``` JavaScript
+const OLOO = {
+  // ...
+}
+```
+
+You need a method inside the blueprint to initialise instances. This method is often called `init`. But it can also be called `constructor` `start`, or whatever you want.
+
+In `init` you would write the same code as if you were writing the Constructor syntax.
+
+``` JavaScript
+const Human {
+  init(firstName, lastName) {
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+}
+```
+
+In `init` you would write the same code as if you were writing the Constructor syntax.
+
+You create an instance with `Object.create`. This instance must then be initialized with the `init` function.
+
+``` JavaScript
+
+const Human {
+  init(firstName, lastName) {
+    this.firstName = firstName
+    this.lastName = lastName
+    return this
+  }
+}
+
+const person1 = Object.create(Human)
+person1.init('Matthew', 'Millard')
+console.log(person1)
+```
+
+``` JavaScript
+// More OLOO Object Linked to Other Object
+
+const car = {
+	init(brand, model, type, year, color) {
+		this.brand = brand
+		this.model = model
+		this.type = type
+		this.year = year
+		this.color = color
+		return this
+	},
+}
+
+const vwTiguan = Object.create(car).init('Volkswagen', 'Tiguan', 'SUV', '2018', 'Black')
+console.log(vwTiguan)
+
+```
+
+If you return `this` inside `init`, you can chain `Object.create` with the `init` method.
+
+### Factory Functions
+
+A Factory Function is a function that:
+
+1. Returns an object
+2. The returned object doesn't need the `new` keyword
+
+The simplest factory function looks like this:
+
+``` JavaScript
+// Factory that returns an empty object
+function Factory() {
+  return {}
+}
+```
+
+We can create the same `Human` blueprint by writing this:
+
+``` JavaScript
+// Creating a Factory
+function Human(firstName, lastName) {
+  return {
+    firstName: firstName,
+    lastName: lastName,
+  }
+}
+
+const matthew = Human('Matthew', 'Millard')
+console.log(matthew)
+// 
+```
+
+You run the Factory Function to initialize the instance. (You don't need the `new`. You don't need to call `init` either.)
+
+``` JavaScript
+function House(bedrooms, bathrooms, garden, garage, type) {
+	return {
+		bedrooms: bedrooms,
+		bathrooms: bathrooms,
+		garden: garden,
+		garage: garage,
+		type: type,
+	}
+}
+
+const newHouse = House(4, 2, true, true, 'detached')
+console.log(newHouse)
+// {
+// bedrooms: 4,
+// bathrooms: 2,
+// garden: true,
+// garage: true,
+// type: 'detached'
+// }
+```
+
+### Inheritance
+
+Inheritance is a loaded word in Object Oriented Programming. Programmers use it to mean different things.
+
+To understand Inheritance, we need to define this word into its fundamental form.
+
+#### What is Inheritance?
+
+Inheritance (in real life) is about getting stuff (like money and genes) from you parents.
+
+**Inheritance** (in JavaScript) `is about getting properties` (**and methods**) `from parent objects`.
+
+There are two ways to inherit properties:
+
+1. Copy-Pasta
+2. Delegation through Prototypes
+
+#### Copy Pasta (Pasting)
+
+Copy-pasting means you copy properties into the instance.
+When you copy-paste, each instance will have its own version of the property.
+
+Example: Let's say you want to create a `Human` constructor again.
+
+``` JavaScript
+function Human(firstName, lastName) {
+	// Properties
+	this.firstName = firstName
+	this.lastName = lastName
+
+	// Methods
+	this.printName = function () {
+		return `${this.firstName} ${this.lastName}`
+	}
+}
+
+const newPerson = new Human('Matthew', 'Millard')
+console.log(newPerson)
+```
+
+- Each Human has a firstName and lastName.
+
+- Each `Human` should also be able to say their names with a method called `sayName`.
+
+You can create an instance with the `new` keyword. Each instance will have its own properties. Properties are completely different from other instances.
+
+``` JavaScript
+const amy = new Human('Amy', 'Crooks')
+const ginette = new Human('Ginette', 'Crooks')
+const donald = new Human('Donald', 'Crooks')
+
+```
+
+Properties do not reference each other. If you change amy's printName method, it does not affect ginette's or donald's printName method.
+
+``` JavaScript
+function Human(firstName, lastName) {
+  // Properties
+  this.firstName = firstName
+  this.lastName = lastName
+  // Methods
+  this.printName = function () {
+    return `${this.firstName} ${this.lastName}`
+  }
+}
+
+const amy = new Human('Amy', 'Crooks')
+const ginette = new Human('Ginette', 'Crooks')
+const donald = new Human('Donald', 'Crooks')
+
+amy.printName = function() {
+  return `${this.firstName}'s printName method will now be different from Ginette's and Donald's printName method.`
+}
+
+console.log(amy.printName());
+// Amy's printName method will now be different from Ginette's and Donald's printName method.
+
+```
+
+### Delegation via Prototypes
+
+When you delegate a task to another person (in real life), you ask that person to do the job for you.
+
+When you delegate (in JavaScript), you ask the delegated object to call the property (or method).
+
+Other names for Delegation via Prototype include:
+
+1. Prototypal Inheritance
+2. Prototype Inheritance
+3. Prototypal Delegation
+4. Prototype Delegation
+
+All are interchangeable.
+
+Example:
+
+Each instance needs its own firstName and lastName properties.
+We'll use the Copy-pasting method to create these two properties.
+
+``` JavaScript
+function Human(firstName, middleName, lastName) {
+	this.firstName = firstName
+	this.middleName = middleName
+	this.lastName = lastName
+	// We won't add any methods this time.
+}
+```
+
+We can create it outside of the Human constructor, inside a prototype object. (All constructors have a prototype object.)
+
+``` JavaScript
+Human.prototype.printName = function () {
+	return `${this.firstName} ${this.middleName} ${this.lastName}`
+}
+```
+
+You can then create instances with the new keyword as before:
+
+``` JavaScript
+const matthew = new Human('Matthew', 'Richie', 'Millard')
+
+// Human {
+//firstName: 'Matthew',
+//middleName: 'Millard',
+//lastName: undefined
+//}
+```
+
+As you can see, the matthew instance does not contain the printName method.
+
+But they can both say their own names.
+
+``` JavaScript
+console.log(matthew.printName())
+// Matthew Richie Millard
+```
+
+Instances can say their names because printName is declared inside the contructor's prototype. If you expand the `__proto__` object, you will see printName.
+
+### The Prototype Chain
+
+Here's what JavaScript does when you access a property:
+
+**Step 1:** JavaScript checks if the property is available inside the object. If yes, JavaScript uses the property straight away.
+
+**Step 2:** If the property is NOT inside the object, JavaScript checks if there's a Prototype available. If there is a Prototype, repeat Step 1 (and check if the property is inside the prototype).
+
+**Step 3:** If there are no more Prototypes left, and JavaScript cannot find the property, it does the following:
+
+- Returns undefined (if you tried to access a property).
+
+- Throws an error (if you tried to call a method).
+
+``` JavaScript
+// Prototype Chain
+
+function Car(brand, type, model) {
+	this.brand = brand
+	this.type = type
+	this.model = model
+}
+
+// Create an instance of Car
+const car1 = new Car('Volkswagen', 'SUV', 'Tiguan')
+const car2 = new Car('Jeep', 'SUV', 'Compass')
+
+// Add a method to the prototype object of the Car constructor object
+Car.prototype.printCar = function () {
+	return `${this.brand} ${this.model} is an ${this.type}`
+}
+
+// Add a property to the prototype object of the Car constructor object
+Car.prototype.condition = 'Pre-owned'
+
+console.log(car1.condition)
+// Pre-owned
+```
+
+### The meaning of delegation
+
+If a property is found inside a prototype, JavaScript asks the prototype for the property.
+
+Each instance effectively hands over the job of accessing the property (or calling the method) to the prototype. In other words, they delegate the job away to the prototype.
+
+Hence, the phrase Delegation via Prototype.
+
+## Prototypal Delegation in 4 flavours
+
+### Constructor Syntax
+
+``` JavaScript
+// Constructor Syntax - Add a method to the prototype object.
+
+function Car(brand, model, year) {
+	this.brand = brand
+	this.model = model
+	this.year = year
+}
+
+Car.prototype.printCar = function () {
+	return `${this.brand} ${this.model} ${this.year}`
+}
+
+const newCar = new Car('VW', 'Tiguan', '2018')
+console.log(newCar.printCar())
+```
+
+### Class Syntax
+
+Prototypal Delegation is easier in Classes compared to constructors. You can write the property directly inside the class.
+
+``` JavaScript
+// Class Syntax - Add a method to the prototype
+
+class CreateCar {
+	constructor(brand, model, year) {
+		this.brand = brand
+		this.model = model
+		this.year = year
+	}
+	// This adds the method printCar to the prototype object
+	printCar() {
+		return `${this.brand} ${this.model} ${this.year}`
+	}
+}
+
+// Create an instance of a car
+const car1 = new CreateCar('Jeep', 'Compass', '2016')
+console.log(car1)
+
+// Print the car details using the method in the prototype object
+console.log(car1.printCar());
+```
+
+NOTE: Pay attention to the differences in syntax between classes and objects. This is one common mistake for developers who're new to the `class` syntax.
+
+- Properties in classes are NOT seperated with `,`.
+
+- Properties in objects ARE seperated with `,`.
+
+### OLOO Objects Linking to Other Objects
+
+``` JavaScript
+const Car = {
+	init(brand, model, year) {
+		this.brand = brand
+		this.model = model
+		this.year = year
+		return this
+	},
+
+	// Similiar to classes you can add a method or property to the prototype within side the constructor.
+	printCar() {
+		return `${this.brand} ${this.model} ${this.year}`
+	},
+}
+
+// Notice that the init constructor object and printCar method are seperated by a comma.
+
+// Create an instance using the OLOO syntax
+const vehicle = Object.create(Car).init('VW', 'Tiguan', '2018')
+console.log(vehicle)
+
+// Call the printCar method
+console.log(vehicle.printCar())
+```
+
+## Day 30
+
+### Destructuring
+
+If you want to get a value from an object, you need declare the variable and assign the value to it.
+
+``` JavaScript
+// Getting values from objects
+const object = {
+  car: 'Ferrari',
+  house: 'Penthouse Suite',
+  pet: 'dog',
+}
+
+const car = object.car
+const house = object.house
+const pet = object.pet
+```
+
+However, since the release of ES6, you can destructure variables - a process to declare and assign multiple variables with one line of code.
+
+#### Destructuring Arrays
+
+To destructure an array, you write the names of the variables you'd like to declare within square brackets(`[]`)
+
+``` JavaScript
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+const [first, second, third] = numbers
+
+console.log(first, second, third) // 1 2 3
+```
+
+The first destructured variable will always be the first item in the array, the second destructured variable will always be the second item, and so on...
+
+If there are not enough items in the array, the destructured variable will remain `undefined`.
+
+#### Destructuring Objects
+
+To destructure an object, you write the names of the properties you'd like to declare as variables in curly braces (`{}`).
+
+``` JavaScript
+// Destructuring an object
+
+const person = {
+	fName: 'Matthew',
+	lName: 'Millard',
+	age: 34,
+	pets: {
+		dog: 2,
+		cat: 1,
+	},
+}
+
+const { fName, lName, age, pets } = person
+console.log(fName, lName, age, pets.dog, pets.cat)
+```
+
+If you try to destructure a non-existant property, you'll get `undefined`.
+
+``` JavaScript
+const person = {
+  name: 'Matthew',
+  age: 34,
+  gender: 'Male',
+}
+
+const { sexuality } = person
+console.log(sexuality)
+// undefined
+```
+
+### Destructuring with a different variable
+
+You declare variables when you destructure. That means you cannot have two variables of the same name. For example, say you had a variable declared in the global scope, and you defined a variable in the destructuring of the object or array with a matching name, it would throw and error.
+
+However, you can change the name of your destructured variable with colon (`:`).
+
+### Destructuring function arguments
+
+You can also destructure function arguments if the arguments is an array or an object.
+
+``` JavaScript
+// Object Example
+
+const person = {
+	fName: 'Matthew',
+	lName: 'Millard',
+	age: 34,
+	pets: {
+		dog: 2,
+		cat: 1,
+	},
+}
+
+function printDetails({ fName, lName, age, pets }) {
+	console.log(`My name is ${fName} ${lName}, I am ${age} years old and I have ${pets.dog} dogs and ${pets.cat} cat.`)
+}
+
+printDetails(person)
+// My name is Matthew Millard, I am 34 years old and I have 2 dogs and 1 cat.
+```
+#### Destructuring as an argument - Array
+
+``` JavaScript
+// Destructuring Arrays as an argument
+
+const people = ['Matthew', 'Amy', 'Ginette', 'Donald']
+
+function getPerson([person1, person2, person3, person4]) {
+	switch ('Donald') {
+		case person1:
+			console.log(`Person1 is Donald.`)
+			break
+		case person2:
+			console.log(`Person2 is Donald.`)
+			break
+		case person3:
+			console.log(`Person3 is Donald.`)
+			break
+		case person4:
+			console.log(`Person4 is Donald.`)
+			break
+		default:
+			console.log('Donald is not in the array.')
+			break
+	}
+}
+
+getPerson(people)
+// Person4 is Donald.
+```
+
+#### Default parameters when destructuring
+
+You can provide fallback values for destructured variables with `=.
+
+``` JavaScript
+// Fallback value for destructured array
+const people = ['Matthew', 'Gareth', 'Daniel', 'Garry', 'Suzi']
+
+const [person1, person2, person3, person4, person5, person6 = 'Ella'] = people
+
+console.log(person6)
+// Ella
+```
+``` JavaScript
+// Fallback value for destructured object
+const course = { name: 'Learn JavaScript' }
+const { description = 'Best JavaScript course ever!' } = course
+
+console.log(description) // Best JavaScript course ever!
+```
+
+### Wrapping Up
+
+Destructing gives you a way to extract values from objects and arrays quickly.
+
+To destructure an array, you use `[]`. The first destructured variable is always the first item in the array, the second destructured variable is the second item in the array, and so on.
+
+To destructure an object, you use `{}`. The destructured variable should be the property name of the object. You can even rename destructured variable if you wish too.
+
+You can also provide default values to a destructured variable if it doesn't exist.
 
